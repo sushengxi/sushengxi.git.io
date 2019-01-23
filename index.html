@@ -62,6 +62,81 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mongodb" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/sushengxi.git.io/2019/01/23/mongodb/" class="article-date">
+  <time datetime="2019-01-23T04:47:24.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/sushengxi.git.io/2019/01/23/mongodb/">mongodb聚合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mongodb聚合"><a href="#mongodb聚合" class="headerlink" title="mongodb聚合"></a>mongodb聚合</h2><p>&ensp;&ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。<br>基本语法为：db.collection.aggregate( [ &lt;stage1&gt;, &lt;stage2&gt;, … ] )<br>我们在数据库中插入一下文档：</p>
+<hr>
+<p>&ensp;&ensp;db.collection.save({“name”:”s”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”a”,”sex”:”男”,”age”:2,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”d”,”sex”:”女”,”age”:3,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”g”,”sex”:”女”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”h”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”k”,”sex”:”女”,”age”:1,”score”:100})</p>
+<hr>
+<p>&ensp;&ensp;执行下面的语句<br>db.collection.aggregate([{“$group”:{“_id”:”$sex”,”personCount”:{“$sum”:1}}}])<br>对性别sex进行分组并统计他们的数量</p>
+<hr>
+<p><img src="&quot;personcount.png&quot;" alt="mongodb"></p>
+<hr>
+<p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br>&ensp;&ensp;db.collection.save({“name”:”p”,”sex”:”男”,”age”:1,”score”:600})<br>&ensp;&ensp;db.collection.save({“name”:”u”,”sex”:”女”,”age”:1,”score”:20})<br>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br>dv.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreAvg”:{“$avg”:”$score”}}}])</p>
+<hr>
+<p><img src="scoreavg.png" alt="mongodb"></p>
+<hr>
+<p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMax”:{“$max”:”$score”}}])</p>
+<hr>
+<p><img src="scoreavg.png" alt="mongodb"></p>
+<hr>
+<p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMin”:{“$min”:”$score”}}])</p>
+<hr>
+<p><img src="scoreavg.png" alt="mongodb"></p>
+<hr>
+<p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$push”:”$score”}}])</p>
+<hr>
+<p><img src="push.png" alt="mongodb"></p>
+<hr>
+<p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$addToSet”:”$score”}}])</p>
+<hr>
+<p><img src="addtoset.png" alt="mongodb"></p>
+<hr>
+<p>根据资源文档的排序获取第一个元素 $first<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”firstelement”:{“$first”:”$score”}}])</p>
+<hr>
+<p><img src="firstelement.png" alt="mongodb"></p>
+<hr>
+<p>根据资源文档的排序获取最后一个元素 $last<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”lastelement”:{“$last”:”$score”}}])</p>
+<hr>
+<p><img src="last.png" alt="mongodb"></p>
+<hr>
+<p>全部统计不进行分组<br>db.collection.aggregate([“$group”:{“_id”:”null”,”totalScore”:{“$push”:”$score”}}])</p>
+<hr>
+<p><img src="all.png" alt="mongodb"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/" data-id="cjr8q76q20000v0v83bmo5x16" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mondodb聚合" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/sushengxi.git.io/2019/01/23/mondodb聚合/" class="article-date">
@@ -119,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/" data-id="cjr8p6hi80000m4v8pwdyc5ok" class="article-share-link">Share</a>
+      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/" data-id="cjr8q76q90002v0v8kot0t4b5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,6 +233,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/sushengxi.git.io/2019/01/23/mongodb/">mongodb聚合</a>
+          </li>
         
           <li>
             <a href="/sushengxi.git.io/2019/01/23/mondodb聚合/">(no title)</a>

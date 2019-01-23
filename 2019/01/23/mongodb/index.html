@@ -5,29 +5,29 @@
   
 
   
-  <title>Hexo</title>
+  <title>mongodb聚合 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: mongodb聚合subtitle:description:author: little sutype:categorieslanguage:timezone: mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.colle">
+  <meta name="description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/index.html">
+<meta property="og:title" content="mongodb聚合">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: mongodb聚合subtitle:description:author: little sutype:categorieslanguage:timezone: mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.colle">
+<meta property="og:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/personcount.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/scoreavg.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/scoreavg.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/scoreavg.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/push.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/addtoset.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/firstelement.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/last.png">
-<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/all.png">
-<meta property="og:updated_time" content="2019-01-23T04:37:28.629Z">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/%22personcount.png%22">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/scoreavg.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/scoreavg.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/scoreavg.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/push.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/addtoset.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/firstelement.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/last.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/all.png">
+<meta property="og:updated_time" content="2019-01-23T05:06:03.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title: mongodb聚合subtitle:description:author: little sutype:categorieslanguage:timezone: mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.colle">
-<meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/mongodb聚合/personcount.png">
+<meta name="twitter:title" content="mongodb聚合">
+<meta name="twitter:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
+<meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/%22personcount.png%22">
   
     <link rel="alternate" href="/sushengxi.git.io/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -74,64 +74,72 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mondodb聚合" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-mongodb" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/sushengxi.git.io/2019/01/23/mondodb聚合/" class="article-date">
-  <time datetime="2019-01-23T03:16:46.336Z" itemprop="datePublished">2019-01-23</time>
+    <a href="/sushengxi.git.io/2019/01/23/mongodb/" class="article-date">
+  <time datetime="2019-01-23T04:47:24.000Z" itemprop="datePublished">2019-01-23</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mongodb聚合
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: mongodb聚合<br>subtitle:<br>description:<br>author: little su<br>type:categories<br>language:<br>timezone:</p>
-<h2 id="mongodb聚合"><a href="#mongodb聚合" class="headerlink" title="mongodb聚合"></a>mongodb聚合</h2><p>&ensp;&ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。<br>基本语法为：db.collection.aggregate( [ &lt;stage1&gt;, &lt;stage2&gt;, … ] )<br>我们在数据库中插入一下文档：</p>
+        <h2 id="mongodb聚合"><a href="#mongodb聚合" class="headerlink" title="mongodb聚合"></a>mongodb聚合</h2><p>&ensp;&ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。<br>基本语法为：db.collection.aggregate( [ &lt;stage1&gt;, &lt;stage2&gt;, … ] )<br>我们在数据库中插入一下文档：</p>
 <hr>
 <p>&ensp;&ensp;db.collection.save({“name”:”s”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”a”,”sex”:”男”,”age”:2,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”d”,”sex”:”女”,”age”:3,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”g”,”sex”:”女”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”h”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”k”,”sex”:”女”,”age”:1,”score”:100})</p>
 <hr>
 <p>&ensp;&ensp;执行下面的语句<br>db.collection.aggregate([{“$group”:{“_id”:”$sex”,”personCount”:{“$sum”:1}}}])<br>对性别sex进行分组并统计他们的数量</p>
 <hr>
-<p><img src="mongodb聚合/personcount.png" alt="mongodb"></p>
+<p><img src="&quot;personcount.png&quot;" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br>&ensp;&ensp;db.collection.save({“name”:”p”,”sex”:”男”,”age”:1,”score”:600})<br>&ensp;&ensp;db.collection.save({“name”:”u”,”sex”:”女”,”age”:1,”score”:20})<br>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br>dv.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreAvg”:{“$avg”:”$score”}}}])</p>
 <hr>
-<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
+<p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMax”:{“$max”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
+<p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMin”:{“$min”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
+<p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$push”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/push.png" alt="mongodb"></p>
+<p><img src="push.png" alt="mongodb"></p>
 <hr>
 <p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$addToSet”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/addtoset.png" alt="mongodb"></p>
+<p><img src="addtoset.png" alt="mongodb"></p>
 <hr>
 <p>根据资源文档的排序获取第一个元素 $first<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”firstelement”:{“$first”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/firstelement.png" alt="mongodb"></p>
+<p><img src="firstelement.png" alt="mongodb"></p>
 <hr>
 <p>根据资源文档的排序获取最后一个元素 $last<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”lastelement”:{“$last”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/last.png" alt="mongodb"></p>
+<p><img src="last.png" alt="mongodb"></p>
 <hr>
 <p>全部统计不进行分组<br>db.collection.aggregate([“$group”:{“_id”:”null”,”totalScore”:{“$push”:”$score”}}])</p>
 <hr>
-<p><img src="mongodb聚合/all.png" alt="mongodb"></p>
+<p><img src="all.png" alt="mongodb"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/" data-id="cjr8q76q90002v0v8kot0t4b5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mongodb/" data-id="cjr8q76q20000v0v83bmo5x16" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,15 +148,11 @@
     
 <nav id="article-nav">
   
-    <a href="/sushengxi.git.io/2019/01/23/mongodb/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          mongodb聚合
-        
-      </div>
-    </a>
   
+    <a href="/sushengxi.git.io/2019/01/23/mondodb聚合/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
   
 </nav>
 
