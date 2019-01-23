@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="中文，英文">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/sushengxi.git.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/sushengxi.git.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/sushengxi.git.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/sushengxi.git.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/sushengxi.git.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/sushengxi.git.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#Nodejs中间件&amp;ensp;&amp;ensp;一.log4js的使用非常简单:&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1.安装包(npm install log4js)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;2.创建日志目录(./logs/log_fie/)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;3.添加一个日志输出规则的配置文件(log4js.json)(这个也是有缺省的,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs log4js的使用">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/22/Nodejs-log4js的使用/index.html">
+<meta property="og:site_name" content="little su的博客">
+<meta property="og:description" content="#Nodejs中间件&amp;ensp;&amp;ensp;一.log4js的使用非常简单:&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1.安装包(npm install log4js)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;2.创建日志目录(./logs/log_fie/)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;3.添加一个日志输出规则的配置文件(log4js.json)(这个也是有缺省的,">
+<meta property="og:locale" content="中文，英文">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/22/Nodejs-log4js的使用/log4jsconfig.png">
+<meta property="og:updated_time" content="2019-01-23T08:09:22.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs log4js的使用">
+<meta name="twitter:description" content="#Nodejs中间件&amp;ensp;&amp;ensp;一.log4js的使用非常简单:&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1.安装包(npm install log4js)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;2.创建日志目录(./logs/log_fie/)&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;3.添加一个日志输出规则的配置文件(log4js.json)(这个也是有缺省的,">
+<meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/22/Nodejs-log4js的使用/log4jsconfig.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/sushengxi.git.io/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/22/Nodejs-log4js的使用/">
+
+
+
+
+
+  <title>Nodejs log4js的使用 | little su的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="中文，英文">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/sushengxi.git.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">little su的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">开发中遇到的问题及一些知识的梳理</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/sushengxi.git.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/sushengxi.git.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/01/22/Nodejs-log4js的使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nodejs log4js的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-22T15:05:59+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#Nodejs中间件<br>&ensp;&ensp;一.log4js的使用非常简单:<br>&ensp;&ensp;&ensp;&ensp;1.安装包(npm install log4js)<br>&ensp;&ensp;&ensp;&ensp;2.创建日志目录(./logs/log_fie/)<br>&ensp;&ensp;&ensp;&ensp;3.添加一个日志输出规则的配置文件(log4js.json)(这个也是有缺省的,但往往缺省配置是不满足使用需求的)<br>&ensp;&ensp;&ensp;&ensp;4.代码中加载log4js,并将配置文件获取到调用一下配置方法(log4js.configure(cfg.json))<br>&ensp;&ensp;&ensp;&ensp;5.写日志log4js.getLogger(‘log_test’).debug(“随便写日志啦!!!”)<br>&ensp;&ensp;二.Log4js的配置详解<br>&ensp;&ensp;1.appenders属性<br>&ensp;&ensp;appenders是配置文件的一级属性:它的作用是配置输出源.后续我们真正输出日志的对象就是appenders的下属子项标注的输出&ensp;&ensp;源appenders的子属性.<br>&ensp;&ensp;1.1 category配置<br>&ensp;&ensp;category翻译过来叫做种类.实际上更简单的理解成这个写日志员工的名字.<br>&ensp;&ensp;当我们有多个员工时就依靠与这个字段来区分,前面例子中,写日志前有这样一行code:<br>&ensp;&ensp;log4js.getLogger(‘log_file’).debug(…);<br>&ensp;&ensp;这个getLogger()的参数就是category的配置内容,可以是任意字符串<br>&ensp;&ensp;1.2 type配置<br>&ensp;&ensp;type字段是控制日志输出对象的是什么类型的,比较常用的配置有三个:<br>&ensp;&ensp;&ensp;&ensp;a.”type”:”console”:<br>&ensp;&ensp;&ensp;&ensp;type配置为console表示控制台,在此种配置下,往往用于调试时.细节参见2.replaceConsole中的描述.<br>&ensp;&ensp;b.”type”:”file”:<br>&ensp;&ensp;&ensp;&ensp;type配置为file表示日志输出为普通文件,在此种配置下,日志会输出到目标文件夹的目标文件中,并会随着文件大小的变化自动份文件.<br>&ensp;&ensp; 该模式下的具体生成文件方法:<br>&ensp;&ensp;相关有效配置包含:maxLogSize,backups,filename<br>&ensp;&ensp;相关无效配置包含:pattern,alwaysIncludePattern<br>&ensp;&ensp;c.”type”:”datefile”<br>&ensp;&ensp;type配置为datefile表示是输出按时间分文件的日志,在此种配置下,日志会输出到目标目录下,并以时间格式命名,随着时间的&ensp;&ensp;推移,以时间格式命名的文件如果尚未存在,则自         动创建新的文件.<br>&ensp;&ensp;该模式下的具体生成文件方法:<br>&ensp;&ensp;相关有效配置包含:pattern,alwaysIncludePattern,filename<br>&ensp;&ensp;相关无效配置包含:maxLogSize,backups<br>&ensp;&ensp;1.3 filename配置<br>&ensp;&ensp;a.filename是一个目录加上文件名,路径就是日志文件存储的路径.<br>&ensp;&ensp; b.此路径可以是相对路径也可以绝对路径,当是相对路径时,是相对于工程根目录.<br>&ensp;&ensp;c.无论是相对路径还是绝对路径,路径过程中的所有文件夹必须事先手动创建好,log4js不会自动创建,如路径不存在则会报错.<br>&ensp;&ensp;d.最后的文件名就是输出文件的名字模版,真实的名字会一定的修改,<br>&ensp;&ensp;&ensp;&ensp;d1:type:datefile 时会加上时间标签,如 [log-2015-01-24 , log-2015-01-25]<br>&ensp;&ensp;&ensp;&ensp;d2:type:file时 如果文件过大,份文件后会增加一个编号标签. [log.1 log.2 log.3 …]<br>&ensp;&ensp;1.4 maxLogSize配置<br>&ensp;&ensp;这个只在type:file模式有效.表示文件多大时才会创建下一个文件,单位是字节.实际设置时具体的值根据业务来定,但是不推荐&ensp;&ensp;大于100Mb.<br>&ensp;&ensp;1.5 pattern配置<br>&ensp;&ensp;这个只在type:datefile模式有效.表示一个文件的时间命名模式.在生成文件中会依照pattern配置来在filename的文件结尾&ensp;&ensp;追加一个时间串来命名文件.上个例子:<br>&ensp;&ensp;&ensp;&ensp;配置文件内容:<br>&ensp;&ensp;&ensp;&ensp;{<br>&ensp;&ensp;&ensp;&ensp;”category”:”log_date”,<br>&ensp;&ensp;&ensp;&ensp;”type”: “dateFile”,<br>&ensp;&ensp;&ensp;&ensp;”filename”: “./logs/log_date/date”,<br>&ensp;&ensp;&ensp;&ensp;”alwaysIncludePattern”: true,<br>&ensp;&ensp;&ensp;&ensp;”pattern”: “-yyyy-MM-dd-hh:mm:ss.log”<br>&ensp;&ensp;&ensp;&ensp;}<br>&ensp;&ensp;此时生成的文件名就是date-2015-01-24-14:24:12.log<br>&ensp;&ensp;pattern精确到ss(秒)就是一秒一个文件,精确到mm(分)就是一分一个文件,一次类推:hh(小<br>&ensp;&ensp;时),dd(天),MM(月),yyyy(年),yy(年后两位),注意大小写!<br>&ensp;&ensp;pattern是有默认配置的,默认配置是”.yyyy-MM-dd”<br>&ensp;&ensp;1.6 alwaysIncludePattern:<br>&ensp;&ensp;这个只在type:datefile模式有效.<br>&ensp;&ensp;这个是个开关配置 ture(默认值)是开启pattern,false是不开启pattern,不开启时datefile文件将无任何时间后缀,也不会&ensp;&ensp;分文件.<br>&ensp;&ensp;1.7 backups配置<br>&ensp;&ensp;这个只在type:file模式有效,表示备份的文件数量,如果文件过多则会将最旧的删除.<br>&ensp;&ensp;type:file模式下log4js的命名规则:正在写的文件就叫filename中配置的文件名,文件过大后会追加数字 例如 log.1 log.2 &ensp;&ensp;log.3 , 直至文件数量达到backups时会把最旧的删除.<br>&ensp;&ensp;当创建一个新的文件时,log4js会把所有之前的文件的.数字编号都顺延一位,最后将刚刚出现的大文件后面追加.1; 这种模式下&ensp;&ensp;应该注意大文件拷贝时对命名的影响,所以maxLogSize不要设置过大.<br>&ensp;&ensp;2.replaceConsole配置<br>&ensp;&ensp;这个配置是表示是否替换控制台输出.当配置文件中配置了appenders中配置了type:console的员工,并且&ensp;&ensp;replaceConsole:true时,代码中控制台输出(console.log  console.error)的内容将会以log4js格式输出到控制台中.<br>&ensp;&ensp;再说一个很实用的小技巧:log4js的时时调试输出:<br>&ensp;&ensp;当我们把实际生产环境的log4js.json配置好后,在调试阶段,日志会输出到各个文件中,试试调试起来很不方便,那么我们可以将各个日志输出员工的type配置为console,这样日志信息就会全都汇总到控制台输出.<br>&ensp;&ensp;此时如果再添加一个如下日志员工配置,则代码中nodejs系统提供的console.log也会输出到控制台中.<br>&ensp;&ensp;{<br>&ensp;&ensp;&ensp;&ensp;”type”:”console”,<br>&ensp;&ensp;&ensp;&ensp;”category”:”console”<br>&ensp;&ensp;}<br>&ensp;&ensp;其中category的名字必须叫console,否则无效,<br>&ensp;&ensp;replaceConsole:ture时如果不加这行,nodejs系统提供的console.log()输出的内容将不会显示<br>&ensp;&ensp;3.levels配置<br>&ensp;&ensp;levels配置也是一个一级属性,它控制着日志的输出级别.在发布的程序,如果很稳定,一些不重要的日志是需要隐去的,但当调试阶段或者环境异常时我们需要重现所有流程,就需要全面的日志.<br>&ensp;&ensp;levels的结构中配置着若干个属性,一般与appenders中的员工对应,其中属性名是appenders中的员工名(也就是category的值),属性值是一个表示等级的字符串.<br>&ensp;&ensp;log4js的levels配置共分为8个等级(也就是日志等级),由低到高分别为:ALL TRACE DEBUG INFO WARN ERROR FATAL OFF.<br>&ensp;&ensp;只有大于等于日志配置级别的信息才能输出出来.<br>&ensp;&ensp;三.Log4js的常见问题和小技巧<br>&ensp;&ensp;配置文件的格式设定<br>&ensp;&ensp;配置文件其实就是一个js对象,json,js,或者自己通过各种set方法赋值出来一个都一样<br>&ensp;&ensp;最开始说需要将配置文件与配置文件log4js.json与log4js模块关联,也就是调用configure()函数加载配置,其实此时就是需&ensp;&ensp;要一个JavaScript对象而已,既然如此,我们完全可以把配置文件写成js格式的文件,类似于这样的:<br>&ensp;&ensp;module.exports = { … 这里面的内容就是上面贴的json啦};<br>&ensp;&ensp;这种模型的优势是如果配置中有动态信息,可以在配置中添加函数,比如用文件名以pid命名,在配置时可以动态获取pid然后字符&ensp;&ensp;串拼接到filename上.另一个优势是json不支持注释,写成js后可以添加注释.<br>&ensp;&ensp;下面是我在项目里面log4js的配置文件</p>
+<hr>
+<p><img src="log4jsconfig.png" alt="mongodb"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/01/20/Nodejs中间件/" rel="next" title="Nodejs中间件">
+                <i class="fa fa-chevron-left"></i> Nodejs中间件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/01/30/Nodejs-app-use的使用/" rel="prev" title="Nodejs app.use的使用">
+                Nodejs app.use的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">little su</p>
+              <p class="site-description motion-element" itemprop="description">h5，javascript,css,node,java,mysql,mongodb</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/sushengxi.git.io/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">little su</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/sushengxi.git.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
