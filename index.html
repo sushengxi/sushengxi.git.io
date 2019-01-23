@@ -82,44 +82,44 @@
 <hr>
 <p>&ensp;&ensp;执行下面的语句<br>db.collection.aggregate([{“$group”:{“_id”:”$sex”,”personCount”:{“$sum”:1}}}])<br>对性别sex进行分组并统计他们的数量</p>
 <hr>
-<p><img src="mongodb/personcount.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/personcount.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br>&ensp;&ensp;db.collection.save({“name”:”p”,”sex”:”男”,”age”:1,”score”:600})<br>&ensp;&ensp;db.collection.save({“name”:”u”,”sex”:”女”,”age”:1,”score”:20})<br>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br>dv.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreAvg”:{“$avg”:”$score”}}}])</p>
 <hr>
-<p><img src="avg/scoreavg.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMax”:{“$max”:”$score”}}])</p>
 <hr>
-<p><img src="max/scoreavg.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMin”:{“$min”:”$score”}}])</p>
 <hr>
-<p><img src="min/scoreavg.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/scoreavg.png" alt="mongodb"></p>
 <hr>
 <p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$push”:”$score”}}])</p>
 <hr>
-<p><img src="push/push.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/push.png" alt="mongodb"></p>
 <hr>
 <p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$addToSet”:”$score”}}])</p>
 <hr>
-<p><img src="addtoset/addtoset.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/addtoset.png" alt="mongodb"></p>
 <hr>
 <p>根据资源文档的排序获取第一个元素 $first<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”firstelement”:{“$first”:”$score”}}])</p>
 <hr>
-<p><img src="firstelement/firstelement.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/firstelement.png" alt="mongodb"></p>
 <hr>
 <p>根据资源文档的排序获取最后一个元素 $last<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”lastelement”:{“$last”:”$score”}}])</p>
 <hr>
-<p><img src="last/last.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/last.png" alt="mongodb"></p>
 <hr>
 <p>全部统计不进行分组<br>db.collection.aggregate([“$group”:{“_id”:”null”,”totalScore”:{“$push”:”$score”}}])</p>
 <hr>
-<p><img src="all/all.png" alt="mongodb"></p>
+<p><img src="mongodb聚合/all.png" alt="mongodb"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/" data-id="cjr8noy7s0000acv8664v1dbj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/sushengxi/sushengxi.git.io.git/2019/01/23/mondodb聚合/" data-id="cjr8p6hi80000m4v8pwdyc5ok" class="article-share-link">Share</a>
       
       
     </footer>
