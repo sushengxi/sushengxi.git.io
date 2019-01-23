@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="中文，英文">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/sushengxi.git.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/sushengxi.git.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/sushengxi.git.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/sushengxi.git.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/sushengxi.git.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/sushengxi.git.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中collection的认识">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/05/05/什么是collection/index.html">
+<meta property="og:site_name" content="little su的博客">
+<meta property="og:description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+<meta property="og:locale" content="中文，英文">
+<meta property="og:updated_time" content="2019-01-23T09:15:00.198Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java中collection的认识">
+<meta name="twitter:description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/sushengxi.git.io/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2018/05/05/什么是collection/">
+
+
+
+
+
+  <title>java中collection的认识 | little su的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="中文，英文">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/sushengxi.git.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">little su的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">开发中遇到的问题及一些知识的梳理</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/sushengxi.git.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/sushengxi.git.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/05/05/什么是collection/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java中collection的认识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T16:25:30+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##java中Collection的认识<br>集合Conllection的基本概念：<br>1、集合的基本认识：如StringBuffer&amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。<br>2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。<br>3、集合的特点：<br>    （1）用于存储对象的容器；即集合中存储的元素是对象<br>    （2）集合的长度是可变的；<br>    （3）集合是不可以存储基本数据类型的；（集合存储基本数据类型时会先进行自动封装成其对应的对象后再进行存储）<br>4、集合框架体系：<br>    集合是用于存储对象的容器。而每种容器内部都有其独特的数据结构，正因为不同的容器内部数据结构不同，使其各自有自己独特的使用场景。虽然每个<br>容器有其独特的结构但是类似的容器还是存在共性的（共性操作方法），所以这些共性方法能被不断抽取，最终形成了集合框架体系。<br>5、集合框架的顶层接口（根接口）：Collection<br>    Collection的常见方法：<br>    （1）添加<br>        boolean add(E e);(这个参数e就是一个对象)<br>        boolean add(Collection&lt;? extends E&gt;” c);<br>    （2）删除<br>        boolean remove(Object o);<br>        boolean removeAll(Collection&lt;? extends E&gt; c)<br>        void clear()；<br>    （3）判断<br>        a.判断集合中是否有元素：boolean isEmpty();<br>        b.判断集合中是否包含某个元素：boolean contains(Object o);<br>        c.判断集合中是否包含某些元素：boolean contains(Collection&lt;?&gt; c);</p>
+<pre><code>（4）获取
+   a.获取集合中元素个数：int size();
+   b.遍历集合中所有元素：Iterator&amp;lt;E&amp;gt; iterator();
+   c.判断两个集合中是否存在相同的元素并保留两个集合中相同的元素删除不同的元素：boolean retainAll(Collection&amp;lt;?&amp;gt; c);
+（5）其他
+   将集合中元素转为数组：a.    Ojbect[] toArray();
+                 b.    &amp;lt;T&amp;gt;  T[] toArray();   泛型
+</code></pre><p>6、迭代器 Iterator<br>    （1）通过集合对象获取其对应的Iterator对象；<br>    （2）判断是否存在下一个元素；<br>    （3）取出该元素并将迭代器对象指向下一个元素；</p>
+<pre><code>Iterator iterator():取出元素的方式：迭代器。
+    该对象必须依赖于具体容器，因为每一个容器的数据结构都不同。
+    所以该迭代器对象是在容器中进行内部实现的。
+    对于使用容器者而言，具体的实现不重要，只要通过容器获取到该实现的迭代器的对象即可，也就是iterator方法。
+</code></pre><p>7、Collection两大体系：链表List、集合Set<br>    List特点：元素有序；元素可以重复；元素都有索引（角标）<br>    Set 特点：元素无序；元素不可以重复；</p>
+<pre><code>List特有的常见方法：有一个共性就是可以操作角标。
+</code></pre><p>8、List三大常用集合：<br>    Vector:内部是数组数据结构，是同步的（线程安全的）。增删查询都很慢。<br>    ArrayList:内部是数组数据结构，是不同步的（线程不安全的）。替代了Vector。查询速度快，增删比较慢。<br>    LinkedList:内部是链表数据结构，是不同步的（线程不安全的）。增删元素速度快。</p>
+<p>9、Set常用集合：<br>    Set中方法与Collection一致。</p>
+<pre><code>（1）HashSet：内部数据结构是哈希表，是不同步的。
+    Set集合中元素都必须是唯一的，HashSet作为其子类也需保证元素的唯一性。
+    判断元素唯一性的方式：
+       通过存储对象（元素）的hashCode和equals方法来完成对象唯一性的。
+       如果对象的hashCode值不同，那么不用调用equals方法就会将对象直接存储到集合中；
+       如果对象的hashCode值相同，那么需调用equals方法判断返回值是否为true，
+        若为false, 则视为不同元素，就会直接存储；
+        若为true， 则视为相同元素，不会存储。
+
+ PS：如果要使用HashSet集合存储元素，该元素的类必须覆盖hashCode方法和equals方法。
+ 一般情况下，如果定义的类会产生很多对象，通常都需要覆盖equals，hashCode方法。建立对象判断是否相同的依据。
+
+（2）TreeSet：保证元素唯一性的同时可以对内部元素进行排序，是不同步的。
+    判断元素唯一性的方式：
+       根据比较方法的返回结果是否为0，如果为0视为相同元素，不存；如果非0视为不同元素，则存。
+    TreeSet对元素的排序有两种方式：
+        方式一：使元素（对象）对应的类实现Comparable接口，覆盖compareTo方法。这样元素自身具有比较功能。
+        方式二：使TreeSet集合自身具有比较功能，定义一个类实现Comparable接口覆盖其compareTo方法。（相当于自定义了一个比较器）
+            将该类对象作为参数传递给TreeSet集合的构造函数。（TreeSet(Comparator&amp;lt;? super E&amp;gt; c) ）
+            ArrayList和Vector有什么区别？HashMap和HashTable有什么区别？
+</code></pre><p>   Vector和HashTable是线程安全的同步的  ArrayList和HashMap性能比Vector和HashTable好<br> 大致讲解java集合的体系结构<br>   List、Set、Map是这个集合体系中最主要的三个接口。<br>      其中List和Set继承自Collection接口。<br>      Set不允许元素重复。HashSet和TreeSet是两个主要的实现类。<br>      List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。<br>      Map也属于集合系统，但和Collection接口不同。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是    三个主要的实现类。<br>      SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/01/30/Nodejs-app-use的使用/" rel="next" title="Nodejs app.use的使用">
+                <i class="fa fa-chevron-left"></i> Nodejs app.use的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/10/23/javascript数据结构-栈/" rel="prev" title="javascript数据结构==>栈">
+                javascript数据结构==>栈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">little su</p>
+              <p class="site-description motion-element" itemprop="description">h5，javascript,css,node,java,mysql,mongodb</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/sushengxi.git.io/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">little su</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/sushengxi.git.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
