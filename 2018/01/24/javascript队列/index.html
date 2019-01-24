@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="中文，英文">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/sushengxi.git.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/sushengxi.git.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/sushengxi.git.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/sushengxi.git.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/sushengxi.git.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/sushengxi.git.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="javascript数据结构队列其实队列跟栈有很多相似的地方，包括其中的一些方法和使用方式，只是队列使用了与栈完全不同的原则，栈是后进先出原则，而队列是先进先出（First In First Out）。 队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript数据接口==&gt;队列">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/24/javascript队列/index.html">
+<meta property="og:site_name" content="little su的博客">
+<meta property="og:description" content="javascript数据结构队列其实队列跟栈有很多相似的地方，包括其中的一些方法和使用方式，只是队列使用了与栈完全不同的原则，栈是后进先出原则，而队列是先进先出（First In First Out）。 队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操">
+<meta property="og:locale" content="中文，英文">
+<meta property="og:updated_time" content="2019-01-24T10:01:49.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript数据接口==&gt;队列">
+<meta name="twitter:description" content="javascript数据结构队列其实队列跟栈有很多相似的地方，包括其中的一些方法和使用方式，只是队列使用了与栈完全不同的原则，栈是后进先出原则，而队列是先进先出（First In First Out）。 队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/sushengxi.git.io/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/24/javascript队列/">
+
+
+
+
+
+  <title>javascript数据接口==>队列 | little su的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="中文，英文">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/sushengxi.git.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">little su的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">开发中遇到的问题及一些知识的梳理</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/sushengxi.git.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/sushengxi.git.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/01/24/javascript队列/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">javascript数据接口==>队列</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-24T17:58:25+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="javascript数据结构队列"><a href="#javascript数据结构队列" class="headerlink" title="javascript数据结构队列"></a>javascript数据结构队列</h2><p>其实队列跟栈有很多相似的地方，包括其中的一些方法和使用方式，只是队列使用了与栈完全不同的原则，栈是后进先出原则，而队列是先进先出（First In First Out）。 队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。<br>　　队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出（FIFO—first in first out）线性表。<br>　　我们对队列有了基本的了解，那么我们来看看如何实现队列。其实跟栈的实现极为类似，只是入队和出队的方法稍有不同，那么我们来看看一个完整的队列需要哪些方法：<br>　　　　1、enqueue(element(s))，入队，向队列尾部添加一个或者多个元素。<br>　　　　2、dequeue()，出队，移除队列中的第一个元素，也就是队列最前面的元素，并返回该元素。<br>　　　　3、front()，获取队列最前面的元素，返回队列中第一个元素（最先被添加，也是最先被移除的元素）。队列并不移除该元素。<br>　　　　4、isEmpty()，判断队列是否不包含任何元素。<br>　　　　5、size()，返回队列的元素总数。<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function Queue() &#123;</span><br><span class="line">   this.dataStroe = [];//队列元素的容器</span><br><span class="line">   this.enqueue = enqueue;//添加元素</span><br><span class="line">   this.dequeue = dequeue;//删除元素</span><br><span class="line">   this.front = front;//获取队列的第一个元素</span><br><span class="line">   this.isEmpty = isEmpty;//队列是否为空</span><br><span class="line">   this.size = length;//队列元素的个数</span><br><span class="line">   this.print = print;//打印元素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>function enqueue (ele) {<br>    this.dataStroe.push(ele); //向队列添加元素<br>}<br>function dequeue() {<br>    return this.dataStroe.shift();//队列删除元素<br>}<br>function front() {<br>    return this.dataStroe[0];//获取队列的第一个元素<br>}<br>function isEmpty() {<br>    return this.dataStroe.length == 0;//判断队列是否为空<br>}<br>function length() {<br>    return this.dataStroe.length;//队列元素的个数<br>}<br>function print() {<br>    return this.dataStroe.toString();//打印队列的元素<br>}<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">上面的代码我们用class和闭包的知识修改一下</span><br></pre></td></tr></table></figure></p>
+<p>var Queue = (function() {<br>    const wm = new WeakMap();<br>    class Queue {<br>        constructor() {<br>            // super();<br>            wm.set(this,[]);<br>        }<br>        enqueue (ele) {<br>            let queue = wm.get(this);<br>            queue.push(ele)<br>        }</p>
+<pre><code>    dequeue() {
+        let queue = wm.get(this);
+        let item = queue.shift();
+        return item;
+    }
+
+    front() {
+        return wm.get(this)[0];
+    }
+
+    isEmpty() {
+        return wm.get(this).length == 0;
+    }
+
+    print() {
+        return wm.get(this).toString();
+    }
+
+}
+return Queue;
+</code></pre><p>})()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">队列又分为优先队列和循环队列</span><br><span class="line">优先队列：</span><br><span class="line">普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。</span><br></pre></td></tr></table></figure></p>
+<p>function precedenceQueue() {<br>    var dataStroe = [];<br>    //添加队列元素<br>    this.enqueue = enqueue;<br>    //删除元素<br>    this.dequeue = dequeue;<br>    //获取队列头元素<br>    this.front = front;<br>    //获取队列元素的个数<br>    this.size = length;<br>    //打印队列所有元素<br>    this.print = print;</p>
+<pre><code>//定义创建优先级元素的函数
+function createdPrecedenceEle(ele,precedence) {
+    this.element = ele;
+    this.precedence = precedence;
+}
+//添加队列元素
+function enqueue(ele,precedence) {
+    var precedeceEle = new createdPrecedenceEle(ele,precedence);
+    var added = false;
+    for(var i = 0; i &lt; dataStroe.length; i++) {
+        if(dataStroe[i].precedence &lt; precedeceEle.precedence ) {
+            dataStroe.splice(i,0,precedeceEle)
+            added = true;
+            break;
+        }
+    }
+    if(!added) {
+        dataStroe.push(precedeceEle)
+    }
+}
+</code></pre><p>   //删除元素<br>   function dequeue() {<br>       return dataStroe.shift();<br>   }<br>   //获取队列头部的元素<br>   function front() {<br>       return dataStroe[0];<br>   }<br>   //获取队列元素的个数<br>   function size() {<br>       return dataStroe.length;<br>   }<br>   //打印队列的元素<br>   function print() {<br>       var sigleStirng = “”;<br>       for(var i = 0; i &lt; dataStroe.length; i++) {<br>           sigleStirng +=(dataStroe[i].element+”—“+dataStroe[i].precedence+”    “)<br>       }<br>       return sigleStirng;<br>   }</p>
+<p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">循环队列</span><br><span class="line">每次循环的时候（从队列头部）取出一个队列头部，再把这个元素加入到队列的尾部，循环 n 次，循环停止时指向的元素删除，直到队列中只剩下一个元素。</span><br></pre></td></tr></table></figure></p>
+<p>function loopQueue(list,number) {<br>    var queue = new Queue();<br>    console.log(queue)<br>     for(var i = 0; i &lt; list.length; i++) {<br>         queue.enqueue(list[i]);<br>     }<br>     console.log(queue.size())<br>     var failName = “”;<br>     while(queue.size() &gt;1) {<br>         for(var i = 0; i &lt; number; i++) {<br>             //每次循环将第一个元素放到队列的尾部<br>             queue.enqueue(queue.dequeue());<br>         }<br>         //出局的元素<br>         failName = queue.dequeue();<br>     }<br>     //返回就是最后剩下的一个元素<br>     console.log(queue.dequeue)<br>     return queue.dequeue();<br>}<br><code>`</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/01/23/javascript数据结构-栈/" rel="next" title="javascript数据结构==>栈">
+                <i class="fa fa-chevron-left"></i> javascript数据结构==>栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sushengxi.git.io/2018/01/30/Nodejs-app-use的使用/" rel="prev" title="Nodejs app.use的使用">
+                Nodejs app.use的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">little su</p>
+              <p class="site-description motion-element" itemprop="description">h5，javascript,css,node,java,mysql,mongodb</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/sushengxi.git.io/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript数据结构队列"><span class="nav-number">1.</span> <span class="nav-text">javascript数据结构队列</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">little su</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sushengxi.git.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/sushengxi.git.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/sushengxi.git.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

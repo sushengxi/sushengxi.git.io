@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="##javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单">
+<meta name="description" content="javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单纯；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript异步的几种方式">
 <meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/11/03/javascript异步的几种方式/index.html">
 <meta property="og:site_name" content="little su的博客">
-<meta property="og:description" content="##javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单">
+<meta property="og:description" content="javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单纯；">
 <meta property="og:locale" content="中文，英文">
-<meta property="og:updated_time" content="2019-01-23T08:09:25.850Z">
+<meta property="og:updated_time" content="2019-01-23T09:25:27.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript异步的几种方式">
-<meta name="twitter:description" content="##javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单">
+<meta name="twitter:description" content="javascript异步的几种方式&amp;ensp;&amp;ensp;javascript中异步的几种方式&amp;ensp;&amp;ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&amp;ensp;&amp;ensp;面一个任务完成，再执行后面一个任务，以此类推）。&amp;ensp;&amp;ensp;这种模式的好处是实现起来比较简单，执行环境相对单纯；">
 
 
 
@@ -299,7 +299,7 @@
       
 
       
-        <p>##javascript异步的几种方式<br>&ensp;&ensp;javascript中异步的几种方式<br>&ensp;&ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&ensp;&ensp;面一个任务完成，再执行后面一个任务，以此类推）。<br>&ensp;&ensp;这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖&ensp;&ensp;延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整&ensp;&ensp;个页面卡在这个地方，其他任务无法执行。<br>&ensp;&ensp;为了解决这个问题，Javascript语言将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。<br>&ensp;&ensp;“同步模式” 就是必须等待上一个任务完成才能进行下一个任务”异步模式”则完全不同，每一个任务有一个或多个回调函数&ensp;&ensp;（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，&ensp;&ensp;所以程序的执行顺序与任务的排列顺序是不一致的、异步的。<br>&ensp;&ensp;“异步模式” 非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应.<br>&ensp;&ensp;处理异步的集中方式<br>&ensp;&ensp;&ensp;&ensp;1.callback(回调函数)<br>&ensp;&ensp;回调是一个函数被作为一个参数传递到另一个函数里，在那个函数执行完后再执行.<br>&ensp;&ensp;举例：<br>&ensp;&ensp;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">first()</span><br><span class="line">seconed()</span><br><span class="line">senconed等待first执行完成在执行</span><br><span class="line"></span><br><span class="line">function first(callback) &#123;</span><br><span class="line">    setTimeOut(() =&gt; &#123;</span><br><span class="line">       callback() </span><br><span class="line">    &#125;,5000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="javascript异步的几种方式"><a href="#javascript异步的几种方式" class="headerlink" title="javascript异步的几种方式"></a>javascript异步的几种方式</h2><p>&ensp;&ensp;javascript中异步的几种方式<br>&ensp;&ensp;javascript语言的执行环境是”单线程”（single thread，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前&ensp;&ensp;面一个任务完成，再执行后面一个任务，以此类推）。<br>&ensp;&ensp;这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖&ensp;&ensp;延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整&ensp;&ensp;个页面卡在这个地方，其他任务无法执行。<br>&ensp;&ensp;为了解决这个问题，Javascript语言将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。<br>&ensp;&ensp;“同步模式” 就是必须等待上一个任务完成才能进行下一个任务”异步模式”则完全不同，每一个任务有一个或多个回调函数&ensp;&ensp;（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，&ensp;&ensp;所以程序的执行顺序与任务的排列顺序是不一致的、异步的。<br>&ensp;&ensp;“异步模式” 非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应.<br>&ensp;&ensp;处理异步的集中方式<br>&ensp;&ensp;&ensp;&ensp;1.callback(回调函数)<br>&ensp;&ensp;回调是一个函数被作为一个参数传递到另一个函数里，在那个函数执行完后再执行.<br>&ensp;&ensp;举例：<br>&ensp;&ensp;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">first()</span><br><span class="line">seconed()</span><br><span class="line">senconed等待first执行完成在执行</span><br><span class="line"></span><br><span class="line">function first(callback) &#123;</span><br><span class="line">    setTimeOut(() =&gt; &#123;</span><br><span class="line">       callback() </span><br><span class="line">    &#125;,5000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&ensp;&ensp;first(seconed());<br>&ensp;&ensp;采用这种方式我们同步变成了异步，先执行程序的主要逻辑将比较好事的操作推迟执行<br>&ensp;&ensp;回调函数的优点是简单容易理解部署方便缺点是代码的耦合性太强，流程很混乱每一个函数只能有一个回调函数<br>&ensp;&ensp;这个地方有一个小细节就是回调不一定是异步他们之间没有直接的关系<br>&ensp;&ensp;举例：<br>&ensp;&ensp;同步回调<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function A(callback) &#123;</span><br><span class="line">    console.log(&quot;first&quot;);</span><br><span class="line">    callback();</span><br><span class="line">&#125;</span><br><span class="line">function B() &#123;</span><br><span class="line">    console.log(&quot;seconed&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&ensp;&ensp;A(B);<br>&ensp;&ensp;异步回调:因为js是单线程的但是有很多操作执行步骤是很耗时的比如从远程获取资源（ajax)如果一直在单线程的堵塞下影响&ensp;&ensp;用户体验解决的方案就是耗时的都让异步去完成等完成了给我资源继续往下走<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.open(&apos;POST&apos;, url, true);   //第三个参数决定是否采用异步的方式</span><br><span class="line">xhr.send(data);</span><br><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">    if(xhr.readystate === 4 &amp;&amp; xhr.status === 200)&#123;</span><br><span class="line">       ///do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&ensp;&ensp;上面这个是浏览器面发送ajax的例子<br>&ensp;&ensp;2.事件监听<br>&ensp;&ensp;事件监听采用的是事件驱动模式,事件的发生不是取决于代码的手续而是事件是否触发<br>&ensp;&ensp;监听函数有on,bind,addEventListeners,listener,observe<br>&ensp;&ensp;以first,seconed为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">first.on(&quot;done&quot;,seconed);(jquery的写法)</span><br><span class="line">function first() &#123;</span><br><span class="line">    setTimeOut(() =&gt; &#123;</span><br><span class="line">       first.trriger(&quot;done&quot;);</span><br><span class="line">    &#125;,1000)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
@@ -397,8 +397,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -413,7 +422,7 @@
               
                 <a href="/sushengxi.git.io/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -440,6 +449,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript异步的几种方式"><span class="nav-number">1.</span> <span class="nav-text">javascript异步的几种方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
