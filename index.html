@@ -1287,143 +1287,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/03/23/javascript原型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="little su">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="little su的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sushengxi.git.io/2017/03/23/javascript原型/" itemprop="url">javascript 原型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T14:27:35+08:00">
-                2017-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="javascript原型"><a href="#javascript原型" class="headerlink" title="javascript原型"></a>javascript原型</h2><h5 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h5><p>每一个对象都与一个可以继承属性的原型对象相关联。从对象文字创建的所有对象都链接到Object.prototype，这是一个JavaScript标准对象<br>所有引用类型（函数，数组，对象）都拥有&#95;&#95;proto&#95;&#95;属性（隐式原型）<br>所有函数拥有prototype属性（显式原型）（仅限函数）<br>原型对象：拥有prototype属性的对象，在定义函数时就被创建<br>&#95;&#95;proto&#95;&#95;：是一个对象拥有的内置属性，是JS内部使用寻找原型链的属性。可以理解为它是一个指针，用于指向创建它的函数对象的原型对象prototype（即构造函数的prototype）用chrome和FF都可以访问到对象的<strong>proto</strong>属性，IE不可以。</p>
-<h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Dog(name,age) &#123;</span><br><span class="line">   this.dogname= name;</span><br><span class="line">   this.dongage = age;</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype.eat = function() &#123;</span><br><span class="line">   console.log(&quot;Host i like eat meat&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let mydog = new Dog(&quot;菲菲&quot;,1);</span><br><span class="line">mydog.eat();</span><br></pre></td></tr></table></figure>
-<p>实例mydog的隐式原型&#95;&#95;proto&#95;&#95;指向的是他构造函数的显示原型prototype<br><code>mydog.__proto__===Dog.prototype</code><br>当调用某种方法或查找某种属性时，首先会在自身调用和查找，如果自身并没有该属性或方法，则会去它的&#95;&#95;proto&#95;&#95;属性中调用查找，也就是它构造函数的prototype中调用查找。所以很好理解实例继承构造函数的方法和属性：<br>mydog本身没有eat方法，所以会去Dog的显式原型中调用eat，即实例继承构造函数的方法。</p>
-<h5 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.a = &quot;w&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;</span><br><span class="line">function Dog(name,age) &#123;</span><br><span class="line">    this.dogName = name;</span><br><span class="line">    this.dogAge = age;</span><br><span class="line">&#125;</span><br><span class="line">let mydog = new Dog(&apos;菲菲&apos;,1);</span><br><span class="line">console.log(mydog.a) //打印1</span><br><span class="line">console.log(mydog.b) //打印2</span><br></pre></td></tr></table></figure>
-<p>上面打印结构 打印1是undefiend 打印2是原因是:<br> mydog是Dog()的实例，是一个Dog对象，它拥有一个属性值&#95;&#95;proto&#95;&#95;，并且&#95;&#95;proto&#95;&#95;是一个对象，包含两个属性值constructor和&#95;&#95;proto&#95;&#95;<br>我们打印一下mydog的&#95;&#95;proto&#95;&#95;属性和constructor属性<br><code>console.log(mydog.__proto__.constructor)
-  console.log(mydog.__proto__.__proto__)</code><br>结果如下</p>
-<hr>
-<p><img src="proto1.png" alt="mongodb"></p>
-<hr>
-<p>我们调用constructor属性，mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;.constructor得到的是Object()函数，Dog.prototype的隐式原型的constructor指向Object()，即Dog.prototype.<strong>proto</strong>.constructor == Object()<br>从mydog.&#95;&#95;proto&#95;&#95;.constructor返回的结果为构造函数本身 Dog.prototype.constructor == Dog()所以mydog.<strong>_proto</strong>.<strong>proto</strong>== Object.prototype<br>所以mydog.b打印结果为b，mydot没有b属性，会一直通过&#95;&#95;proto&#95;&#95;向上查找，最后当查找到Object.prototype时找到，最后打印出b，向上查找过程中，得到的是Object.prototype，而不是Function.prototype，找不到a属性，所以结果为undefined，这就是原型链，通过&#95;&#95;proto&#95;&#95;向上进行查找，最终到null结束</p>
-<p>总结：</p>
-<ul>
-<li>查找属性，如果本身没有，则会去&#95;&#95;proto&#95;&#95;中查找，也就是构造函数的显式原型中查找，如果构造函数的显式原型中也没有该属性，则继续向构造函数的显式原型的&#95;&#95;proto&#95;&#95;中查找，一直到null，如果没有则返回undefined</li>
-<li>mydog.&#95;&#95;proto&#95;&#95;.constructor  == function Dog(){}</li>
-<li>mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;== Object.prototype</li>
-<li>mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;== Object.prototype.&#95;&#95;proto&#95;&#95; == null         </li>
-<li>通过&#95;&#95;proto&#95;&#95;形成原型链而非protrotype<br>结合下面的图片更容易理解原型和原型链<br><img src="prototype.png" alt="mongodb"></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/03/23/mondodb聚合/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1536,6 +1399,126 @@
 <p>全部统计不进行分组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;null&quot;,&quot;totalScore&quot;:&#123;&quot;$push&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="all.png" alt="mongodb"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/01/10/关系型数据库和非关系型数据库的区别/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sushengxi.git.io/2017/01/10/关系型数据库和非关系型数据库的区别/" itemprop="url">关系型数据与非关系型数据库的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T15:22:30+08:00">
+                2017-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##关系型数据库<br>   1.表和表、表和字段、数据和数据存在着关系<br>   优点:<br>   1.数据之间有关系，进行数据的增删改查的时候是非常方便的<br>   2.关系型数据库是有事务操作的，保证数据的完整性和一致性。<br>   缺点：<br>   1.因为数据和数据是有关系的，底层是运行了大量的算法大量算法会降低系统的效率，会降低性能<br>   2.面对海量数据的增删改查的时候会显的无能为力<br>   3.海量数据对数据进行维护变得非常的无力<br>   非关系数据库<br>   为了处理海量数据，非关系数据库设计之初就是为了替代关系型数据库的关系<br>   优点：<br>   1.海量数据的增删改查是可以的<br>   2.海量数据的维护和处理非常轻松<br>  缺点：<br>   1.数据和数据没有关系，他们之间就是单独存在的<br>   2.非关系数据库没有关系，没有强大的事务关系，没有保证数据的完整性和安全性<br>   3.不支持多文档事务(mondodb4.0之前)<br>  适合处理海量数据，保证效率，不一定安全</p>
 
           
         
