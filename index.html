@@ -1287,6 +1287,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/04/23/浏览器的事件循环/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sushengxi.git.io/2017/04/23/浏览器的事件循环/" itemprop="url">浏览器的事件循环</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-23T14:27:35+08:00">
+                2017-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器的事件循环"><a href="#浏览器的事件循环" class="headerlink" title="浏览器的事件循环"></a>浏览器的事件循环</h2><p>首先，javascript 在浏览器端运行是单线程的，这是由浏览器决定的，这是为了避免多线程执行不同任务会发生冲突的情况。也就是说我们写的javascript 代码只在一个线程上运行，称之为主线程（HTML5提供了web worker API可以让浏览器开一个线程运行比较复杂耗时的 javascript任务，但是这个线程仍受主线程的控制）<br>运行下面的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 0; i &lt; 10000;i++) &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;end&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>如果上面的for循环的结束条件更大比较耗时的操作那么在执行这个循环的时候线程就会被阻塞,无法执行下面的操作<br>浏览器是如何解决上面线程阻塞的问题呢<br>为了协调事件，用户交互，脚本，渲染，网络等，用户代理必须使用事件循环。<br>事件循环的主要机制就是任务队列机制:</p>
+<ul>
+<li>一个事件循环有一个或者多个任务队列（task queues）。任务队列是task的有序列表，task是调度Events，Parsing，Callbacks，Using a resource，Reacting to DOM manipulation这些任务的算法;</li>
+<li>每个任务都来自一个特定的任务源（task source）(比如鼠标键盘事件)。来自同一个特定任务源且属于特定事件循环的任务必须被加入到同一个任务队列中，来自不同任务源的任务可以放在不同的任务队列中;</li>
+<li>浏览器调用这些队列中的任务时采取这样的做法: 相同队列中的任务按照先进先出的顺序, 不同的队列按照提前设置的队列优先级来调用. 例如，用户代理可以有一个用于鼠标和键盘事件的任务队列（用户交互任务源），另一个用于其他任务。然后，用户代理75%概率调用键盘和鼠标事件任务队列，25%调用其他队列, 这样的话就保持界面响应而且不会饿死其他任务队列. 但是相同队列中的任务要按照先进先出的顺序。也就是说单独的任务队列中的任务总是按先进先出的顺序执行，但是不保证多个任务队列中的任务优先级，具体实现可能会交叉执行<br>在调用任务的过程中, 会产生新的任务, 浏览器就会不断执行任务, 因此称为事件循环.<br>在调用任务的过程中, 会产生新的任务, 浏览器就会不断执行任务, 因此称为事件循环.<h5 id="微任务队列"><a href="#微任务队列" class="headerlink" title="微任务队列"></a>微任务队列</h5>还有一些特殊任务, 它们不会被放在task queues中, 会放在一个叫做microtask(微任务) queue中任务队列可以有多个, 但是微任务队列只有一个.</li>
+<li>macrotask(宏任务): script（整体代码）, setTimeout, setInterval, setImmediate, I/O, UI rendering等</li>
+<li>microtask(微任务): process.nextTick, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver等<h5 id="事件循环处理过程"><a href="#事件循环处理过程" class="headerlink" title="事件循环处理过程"></a>事件循环处理过程</h5>总体来说, 浏览器端事件循环的一个回合就是:</li>
+<li>从macrotask队列中(task queue)取一个宏任务执行, 执行完后, 取出所有的microtask执行.</li>
+<li>重复回合<br>无论在执行macrotask还是microtask, 都有可能产生新的macrotask或者microtask, 就这样继续执行.<h5 id="具体的代码来理解事件队列"><a href="#具体的代码来理解事件队列" class="headerlink" title="具体的代码来理解事件队列"></a>具体的代码来理解事件队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;)</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">   console.log(&quot;settimeout&quot;);</span><br><span class="line">  &#125;,1000)</span><br><span class="line">setImmediate(() =&gt; &#123;</span><br><span class="line">    console.log(&quot;setImmidate&quot;);</span><br><span class="line"> &#125;)</span><br><span class="line">process.nextTick(() =&gt; &#123;</span><br><span class="line">    console.log(&quot;nextTick&quot;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>执行的结果是start  nextTick  setImmidate  settimeout<br>首先, 主任务就是执行脚本, 也就是执行上述代码, 这也是一个task. 在执行代码过程中, 遇到setTimeout、setInterval 就会将回调函数添加到task queue中, 遇到 process.nextTick 就会回调添加到 microtask 中去.<br>Task执行完, 接着取所有 microtask 执行, 所有microtask 执行完了, microtask queue也就空了, 接着再取task执行, 如果microtask queue为空, 没有任务, 则继续取下一个task执行, 就这样循环执行.<br>至于setimmidate和settimeout的先后顺序还在研究一般情况下setImmidate的延迟比settimeout短一点</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/03/23/mondodb聚合/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1434,126 +1566,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/01/10/关系型数据库和非关系型数据库的区别/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="little su">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="little su的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sushengxi.git.io/2017/01/10/关系型数据库和非关系型数据库的区别/" itemprop="url">关系型数据与非关系型数据库的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T15:22:30+08:00">
-                2017-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##关系型数据库<br>   1.表和表、表和字段、数据和数据存在着关系<br>   优点:<br>   1.数据之间有关系，进行数据的增删改查的时候是非常方便的<br>   2.关系型数据库是有事务操作的，保证数据的完整性和一致性。<br>   缺点：<br>   1.因为数据和数据是有关系的，底层是运行了大量的算法大量算法会降低系统的效率，会降低性能<br>   2.面对海量数据的增删改查的时候会显的无能为力<br>   3.海量数据对数据进行维护变得非常的无力<br>   非关系数据库<br>   为了处理海量数据，非关系数据库设计之初就是为了替代关系型数据库的关系<br>   优点：<br>   1.海量数据的增删改查是可以的<br>   2.海量数据的维护和处理非常轻松<br>  缺点：<br>   1.数据和数据没有关系，他们之间就是单独存在的<br>   2.非关系数据库没有关系，没有强大的事务关系，没有保证数据的完整性和安全性<br>   3.不支持多文档事务(mondodb4.0之前)<br>  适合处理海量数据，保证效率，不一定安全</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1604,7 +1616,7 @@
               
                 <a href="/sushengxi.git.io/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
