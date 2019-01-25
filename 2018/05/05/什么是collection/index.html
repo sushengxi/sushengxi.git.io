@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+<meta name="description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中collection的认识">
 <meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/05/05/什么是collection/index.html">
 <meta property="og:site_name" content="little su的博客">
-<meta property="og:description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+<meta property="og:description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
 <meta property="og:locale" content="中文，英文">
-<meta property="og:updated_time" content="2019-01-23T09:27:57.386Z">
+<meta property="og:updated_time" content="2019-01-25T00:38:34.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中collection的认识">
-<meta name="twitter:description" content="##java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存">
+<meta name="twitter:description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
 
 
 
@@ -299,7 +299,7 @@
       
 
       
-        <p>##java中Collection的认识<br>集合Conllection的基本概念：<br>1、集合的基本认识：如StringBuffer&amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。<br>2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。<br>3、集合的特点：<br>    （1）用于存储对象的容器；即集合中存储的元素是对象<br>    （2）集合的长度是可变的；<br>    （3）集合是不可以存储基本数据类型的；（集合存储基本数据类型时会先进行自动封装成其对应的对象后再进行存储）<br>4、集合框架体系：<br>    集合是用于存储对象的容器。而每种容器内部都有其独特的数据结构，正因为不同的容器内部数据结构不同，使其各自有自己独特的使用场景。虽然每个<br>容器有其独特的结构但是类似的容器还是存在共性的（共性操作方法），所以这些共性方法能被不断抽取，最终形成了集合框架体系。<br>5、集合框架的顶层接口（根接口）：Collection<br>    Collection的常见方法：<br>    （1）添加<br>        boolean add(E e);(这个参数e就是一个对象)<br>        boolean add(Collection&lt;? extends E&gt;” c);<br>    （2）删除<br>        boolean remove(Object o);<br>        boolean removeAll(Collection&lt;? extends E&gt; c)<br>        void clear()；<br>    （3）判断<br>        a.判断集合中是否有元素：boolean isEmpty();<br>        b.判断集合中是否包含某个元素：boolean contains(Object o);<br>        c.判断集合中是否包含某些元素：boolean contains(Collection&lt;?&gt; c);</p>
+        <h2 id="java中Collection的认识"><a href="#java中Collection的认识" class="headerlink" title="java中Collection的认识"></a>java中Collection的认识</h2><p>集合Conllection的基本概念：<br>1、集合的基本认识：如StringBuffer&amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。<br>2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。<br>3、集合的特点：<br>    （1）用于存储对象的容器；即集合中存储的元素是对象<br>    （2）集合的长度是可变的；<br>    （3）集合是不可以存储基本数据类型的；（集合存储基本数据类型时会先进行自动封装成其对应的对象后再进行存储）<br>4、集合框架体系：<br>    集合是用于存储对象的容器。而每种容器内部都有其独特的数据结构，正因为不同的容器内部数据结构不同，使其各自有自己独特的使用场景。虽然每个<br>容器有其独特的结构但是类似的容器还是存在共性的（共性操作方法），所以这些共性方法能被不断抽取，最终形成了集合框架体系。<br>5、集合框架的顶层接口（根接口）：Collection<br>    Collection的常见方法：<br>    （1）添加<br>        boolean add(E e);(这个参数e就是一个对象)<br>        boolean add(Collection&lt;? extends E&gt;” c);<br>    （2）删除<br>        boolean remove(Object o);<br>        boolean removeAll(Collection&lt;? extends E&gt; c)<br>        void clear()；<br>    （3）判断<br>        a.判断集合中是否有元素：boolean isEmpty();<br>        b.判断集合中是否包含某个元素：boolean contains(Object o);<br>        c.判断集合中是否包含某些元素：boolean contains(Collection&lt;?&gt; c);</p>
 <pre><code>（4）获取
    a.获取集合中元素个数：int size();
    b.遍历集合中所有元素：Iterator&amp;lt;E&amp;gt; iterator();
@@ -421,8 +421,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -464,6 +473,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java中Collection的认识"><span class="nav-number">1.</span> <span class="nav-text">java中Collection的认识</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

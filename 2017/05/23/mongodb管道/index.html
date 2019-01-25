@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/05/23/mongodb管道/match.png">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/05/23/mongodb管道/unwind.png">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/05/23/mongodb管道/all.png">
-<meta property="og:updated_time" content="2019-01-23T08:08:55.493Z">
+<meta property="og:updated_time" content="2019-01-25T00:48:28.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongodb管道">
 <meta name="twitter:description" content="#mongodb管道&amp;ensp;&amp;ensp;mongoDB的聚合框架模型建立在数据处理管道这一概念的基础之上。文档进入多阶段管道中，管道将文档转换为聚合结果。最基&amp;ensp;&amp;ensp;本的管道阶段类似于查询过滤器和修改输出文档形式的文档转换器。&amp;ensp;&amp;ensp;其他的管道为分组和排序提供一些工具，可通过指定一个或多个字段完成分组或排序；同时提供了聚合数组内容的工具，操作的&amp;ensp;&amp;en">
@@ -307,35 +307,26 @@
       
 
       
-        <p>#mongodb管道<br>&ensp;&ensp;mongoDB的聚合框架模型建立在数据处理管道这一概念的基础之上。文档进入多阶段管道中，管道将文档转换为聚合结果。最基&ensp;&ensp;本的管道阶段类似于查询过滤器和修改输出文档形式的文档转换器。<br>&ensp;&ensp;其他的管道为分组和排序提供一些工具，可通过指定一个或多个字段完成分组或排序；同时提供了聚合数组内容的工具，操作的&ensp;&ensp;数组包括文档数组。另外，聚合阶段能够使用一些运算符，完成诸如计算均值或连接字符串之类的任务。<br>&ensp;&ensp;管道利用MongoDB本机的操作方法提供了有效的数据聚合操作，并且对于数据聚合来说采用本机的操作方法是首选的。<br>&ensp;&ensp;聚合管道支持在分片集合上执行操作。<br>&ensp;&ensp;数据还用之前聚合里面的这些</p>
+        <p>#mongodb管道<br>&ensp;&ensp;mongoDB的聚合框架模型建立在数据处理管道这一概念的基础之上。文档进入多阶段管道中，管道将文档转换为聚合结果。最基&ensp;&ensp;本的管道阶段类似于查询过滤器和修改输出文档形式的文档转换器。<br>&ensp;&ensp;其他的管道为分组和排序提供一些工具，可通过指定一个或多个字段完成分组或排序；同时提供了聚合数组内容的工具，操作的&ensp;&ensp;数组包括文档数组。另外，聚合阶段能够使用一些运算符，完成诸如计算均值或连接字符串之类的任务。<br>&ensp;&ensp;管道利用MongoDB本机的操作方法提供了有效的数据聚合操作，并且对于数据聚合来说采用本机的操作方法是首选的。<br>&ensp;&ensp;聚合管道支持在分片集合上执行操作。<br>&ensp;&ensp;数据还用之前聚合里面的这些<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;s&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;a&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:2,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;d&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:3,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;g&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;h&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;k&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;p&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:600&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;u&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:20&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>$project 对数据进行修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$project&quot;:&#123;&quot;name&quot;:1,&quot;score&quot;:1&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
+<p><img src="project.png" alt="mongodb"><br>$match 对数据进行过滤(如果是Number类型一定是数字不能是字符串)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$match&quot;:&#123;&quot;score&quot;:&#123;&quot;$gt&quot;:100&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
+<p><img src="match.png" alt="mongodb"><br>$skip 对查询的数据跳过指定数量的文档，返回剩下数量的文档<br>首先查找scroe小于等于100的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$match&quot;:&#123;&quot;score&quot;:&#123;&quot;$lte&quot;100&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
+<p><img src="lte.png" alt="mongodb"></p>
 <hr>
-<p>&ensp;&ensp;db.collection.save({“name”:”s”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”a”,”sex”:”男”,”age”:2,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”d”,”sex”:”女”,”age”:3,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”g”,”sex”:”女”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”h”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”k”,”sex”:”女”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”p”,”sex”:”男”,”age”:1,”score”:600})<br>&ensp;&ensp;db.collection.save({“name”:”u”,”sex”:”女”,”age”:1,”score”:20})</p>
-<hr>
-<p>$project 对数据进行修改<br>db.collection.aggregate([{“$project”:{“name”:1,”score”:1}}])</p>
-<hr>
-<p><img src="project.png" alt="mongodb"></p>
-<hr>
-<p>$match 对数据进行过滤(如果是Number类型一定是数字不能是字符串)<br>db.collection.aggregate([{“$match”:{“score”:{“$gt”:100}}}])</p>
-<hr>
-<p><img src="match.png" alt="mongodb"></p>
-<hr>
-<p>$skip 对查询的数据跳过指定数量的文档，返回剩下数量的文档<br>首先查找scroe小于等于100的数据<br>db.collection.aggregate([{“$match”:{“score”:{“$lte”100}}}])</p>
+<p>然后跳过前三条的数据返回剩下的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$match&quot;:&#123;&quot;score&quot;:&#123;&quot;$lte&quot;100&#125;&#125;&#125;,&#123;&quot;$skip&quot;:3&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="lte.png" alt="mongodb"></p>
 <hr>
-<p>然后跳过前三条的数据返回剩下的<br>db.collection.aggregate([{“$match”:{“score”:{“$lte”100}}},{“$skip”:3}])</p>
-<hr>
-<p><img src="lte.png" alt="mongodb"></p>
-<hr>
-<p>$limt 限制返回数据的条数<br>db.collection.aggregate([{“$match”:{“score”:{“$lte”:100}}},{“$limit”:3}])</p>
+<p>$limt 限制返回数据的条数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$match&quot;:&#123;&quot;score&quot;:&#123;&quot;$lte&quot;:100&#125;&#125;&#125;,&#123;&quot;$limit&quot;:3&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="match.png" alt="mongodb"></p>
 <hr>
-<p>$unwind 将数组里面中的每个值拆分为单独的文档<br>我们先在数据库里面插入下面的数据<br>db.collection.save({“name”:”ssx”,”age”:20,”firends”:[“A”,”B”,”C”]})<br>由于数据库有很多数据我们先找到我们方才插入的那一条 然后以firends分为单独的文档</p>
+<p>$unwind 将数组里面中的每个值拆分为单独的文档<br>我们先在数据库里面插入下面的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;ssx&quot;,&quot;age&quot;:20,&quot;firends&quot;:[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>由于数据库有很多数据我们先找到我们方才插入的那一条 然后以firends分为单独的文档</p>
 <hr>
 <p><img src="unwind.png" alt="mongodb"></p>
 <hr>
-<p>$sort 可以根据任何字段（或者多个字段）进行排序，与在普通查询中的语法是相同的。如果要对大量的文档进行排序，强烈建议在管道的第一阶段进行排序，这时的排序操作可以使用索引。否则，排序过程就会比较慢，而且会占用大量内存。<br>1是升序，-1是降序<br>db.collection.find({}).sort({“score”:1})</p>
+<p>$sort 可以根据任何字段（或者多个字段）进行排序，与在普通查询中的语法是相同的。如果要对大量的文档进行排序，强烈建议在管道的第一阶段进行排序，这时的排序操作可以使用索引。否则，排序过程就会比较慢，而且会占用大量内存。<br>1是升序，-1是降序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;&#125;).sort(&#123;&quot;score&quot;:1&#125;)</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="all.png" alt="mongodb"></p>
 <hr>

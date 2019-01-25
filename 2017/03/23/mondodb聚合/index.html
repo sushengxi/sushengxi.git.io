@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
+<meta name="description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  123456db.collecti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mongodb聚合">
 <meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/index.html">
 <meta property="og:site_name" content="little su的博客">
-<meta property="og:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
+<meta property="og:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  123456db.collecti">
 <meta property="og:locale" content="中文，英文">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/personcount.png">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/scoreavg.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/firstelement.png">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/last.png">
 <meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/all.png">
-<meta property="og:updated_time" content="2019-01-23T08:10:44.514Z">
+<meta property="og:updated_time" content="2019-01-25T00:50:29.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongodb聚合">
-<meta name="twitter:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  &amp;ensp;&amp;ensp;db.co">
+<meta name="twitter:description" content="mongodb聚合&amp;ensp;&amp;ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。基本语法为：db.collection.aggregate( [ &amp;lt;stage1&amp;gt;, &amp;lt;stage2&amp;gt;, … ] )我们在数据库中插入一下文档：  123456db.collecti">
 <meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/mondodb聚合/personcount.png">
 
 
@@ -311,41 +311,43 @@
       
         <h2 id="mongodb聚合"><a href="#mongodb聚合" class="headerlink" title="mongodb聚合"></a>mongodb聚合</h2><p>&ensp;&ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。<br>基本语法为：db.collection.aggregate( [ &lt;stage1&gt;, &lt;stage2&gt;, … ] )<br>我们在数据库中插入一下文档：</p>
 <hr>
-<p>&ensp;&ensp;db.collection.save({“name”:”s”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”a”,”sex”:”男”,”age”:2,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”d”,”sex”:”女”,”age”:3,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”g”,”sex”:”女”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”h”,”sex”:”男”,”age”:1,”score”:100})<br>&ensp;&ensp;db.collection.save({“name”:”k”,”sex”:”女”,”age”:1,”score”:100})</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;s&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;a&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:2,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;d&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:3,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;g&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;h&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;k&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br></pre></td></tr></table></figure>
 <hr>
-<p>&ensp;&ensp;执行下面的语句<br>db.collection.aggregate([{“$group”:{“_id”:”$sex”,”personCount”:{“$sum”:1}}}])<br>对性别sex进行分组并统计他们的数量</p>
+<p>&ensp;&ensp;执行下面的语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;personCount&quot;:&#123;&quot;$sum&quot;:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
+<p>对性别sex进行分组并统计他们的数量</p>
 <hr>
 <p><img src="personcount.png" alt="mongodb"></p>
 <hr>
-<p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br>&ensp;&ensp;db.collection.save({“name”:”p”,”sex”:”男”,”age”:1,”score”:600})<br>&ensp;&ensp;db.collection.save({“name”:”u”,”sex”:”女”,”age”:1,”score”:20})<br>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br>dv.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreAvg”:{“$avg”:”$score”}}}])</p>
+<p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;p&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:600&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;u&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:20&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dv.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreAvg&quot;:&#123;&quot;$avg&quot;:&quot;$score&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
-<p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMax”:{“$max”:”$score”}}])</p>
+<p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreMax&quot;:&#123;&quot;$max&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
-<p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scoreMin”:{“$min”:”$score”}}])</p>
+<p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreMin&quot;:&#123;&quot;$min&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="scoreavg.png" alt="mongodb"></p>
 <hr>
-<p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br>&ensp;&ensp;db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$push”:”$score”}}])</p>
+<p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scores&quot;:&#123;&quot;$push&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="push.png" alt="mongodb"></p>
 <hr>
-<p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”scores”:{“$addToSet”:”$score”}}])</p>
+<p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scores&quot;:&#123;&quot;$addToSet&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="addtoset.png" alt="mongodb"></p>
 <hr>
-<p>根据资源文档的排序获取第一个元素 $first<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”firstelement”:{“$first”:”$score”}}])</p>
+<p>根据资源文档的排序获取第一个元素 $first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;firstelement&quot;:&#123;&quot;$first&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="firstelement.png" alt="mongodb"></p>
 <hr>
-<p>根据资源文档的排序获取最后一个元素 $last<br>db.collection.aggregate([“$group”:{“_id”:”$sex”,”lastelement”:{“$last”:”$score”}}])</p>
+<p>根据资源文档的排序获取最后一个元素 $last<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;lastelement&quot;:&#123;&quot;$last&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="last.png" alt="mongodb"></p>
 <hr>
-<p>全部统计不进行分组<br>db.collection.aggregate([“$group”:{“_id”:”null”,”totalScore”:{“$push”:”$score”}}])</p>
+<p>全部统计不进行分组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;null&quot;,&quot;totalScore&quot;:&#123;&quot;$push&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><img src="all.png" alt="mongodb"></p>
 
