@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
+<meta name="description" content="javascript原型函数对象每一个对象都与一个可以继承属性的原型对象相关联。从对象文字创建的所有对象都链接到Object.prototype，这是一个JavaScript标准对象所有引用类型（函数，数组，对象）都拥有&amp;#95;&amp;#95;proto&amp;#95;&amp;#95;属性（隐式原型）所有函数拥有prototype属性（显式原型）（仅限函数）原型对象：拥有prototype属性的对象，在定义函数时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java中collection的认识">
-<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/05/05/什么是collection/index.html">
+<meta property="og:title" content="javascript 原型">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/javascript原型/index.html">
 <meta property="og:site_name" content="little su的博客">
-<meta property="og:description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
+<meta property="og:description" content="javascript原型函数对象每一个对象都与一个可以继承属性的原型对象相关联。从对象文字创建的所有对象都链接到Object.prototype，这是一个JavaScript标准对象所有引用类型（函数，数组，对象）都拥有&amp;#95;&amp;#95;proto&amp;#95;&amp;#95;属性（隐式原型）所有函数拥有prototype属性（显式原型）（仅限函数）原型对象：拥有prototype属性的对象，在定义函数时">
 <meta property="og:locale" content="中文，英文">
-<meta property="og:updated_time" content="2019-01-25T00:38:34.814Z">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/javascript原型/proto1.png">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/javascript原型/prototype.png">
+<meta property="og:updated_time" content="2019-01-25T04:46:33.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java中collection的认识">
-<meta name="twitter:description" content="java中Collection的认识集合Conllection的基本概念：1、集合的基本认识：如StringBuffer&amp;amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。3、集合的特点：    （1）用于存储对象的容器；即集合中存储的">
+<meta name="twitter:title" content="javascript 原型">
+<meta name="twitter:description" content="javascript原型函数对象每一个对象都与一个可以继承属性的原型对象相关联。从对象文字创建的所有对象都链接到Object.prototype，这是一个JavaScript标准对象所有引用类型（函数，数组，对象）都拥有&amp;#95;&amp;#95;proto&amp;#95;&amp;#95;属性（隐式原型）所有函数拥有prototype属性（显式原型）（仅限函数）原型对象：拥有prototype属性的对象，在定义函数时">
+<meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/javascript原型/proto1.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2018/05/05/什么是collection/">
+  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2017/03/23/javascript原型/">
 
 
 
 
 
-  <title>java中collection的认识 | little su的博客</title>
+  <title>javascript 原型 | little su的博客</title>
   
 
 
@@ -232,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/05/05/什么是collection/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/03/23/javascript原型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="little su">
@@ -249,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java中collection的认识</h1>
+          <h1 class="post-title" itemprop="name headline">javascript 原型</h1>
         
 
         <div class="post-meta">
@@ -261,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T16:25:30+08:00">
-                2018-05-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T14:27:35+08:00">
+                2017-03-23
               </time>
             
 
@@ -299,44 +302,24 @@
       
 
       
-        <h2 id="java中Collection的认识"><a href="#java中Collection的认识" class="headerlink" title="java中Collection的认识"></a>java中Collection的认识</h2><p>集合Conllection的基本概念：<br>1、集合的基本认识：如StringBuffer&amp;StringBuilder是集合（存储的对象类型是String）。数组、对象与其很相似，但是还有区别。<br>2、集合的由来：对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定，就需要使用集合来进行存储。<br>3、集合的特点：<br>    （1）用于存储对象的容器；即集合中存储的元素是对象<br>    （2）集合的长度是可变的；<br>    （3）集合是不可以存储基本数据类型的；（集合存储基本数据类型时会先进行自动封装成其对应的对象后再进行存储）<br>4、集合框架体系：<br>    集合是用于存储对象的容器。而每种容器内部都有其独特的数据结构，正因为不同的容器内部数据结构不同，使其各自有自己独特的使用场景。虽然每个<br>容器有其独特的结构但是类似的容器还是存在共性的（共性操作方法），所以这些共性方法能被不断抽取，最终形成了集合框架体系。<br>5、集合框架的顶层接口（根接口）：Collection<br>    Collection的常见方法：<br>    （1）添加<br>        boolean add(E e);(这个参数e就是一个对象)<br>        boolean add(Collection&lt;? extends E&gt;” c);<br>    （2）删除<br>        boolean remove(Object o);<br>        boolean removeAll(Collection&lt;? extends E&gt; c)<br>        void clear()；<br>    （3）判断<br>        a.判断集合中是否有元素：boolean isEmpty();<br>        b.判断集合中是否包含某个元素：boolean contains(Object o);<br>        c.判断集合中是否包含某些元素：boolean contains(Collection&lt;?&gt; c);</p>
-<pre><code>（4）获取
-   a.获取集合中元素个数：int size();
-   b.遍历集合中所有元素：Iterator&amp;lt;E&amp;gt; iterator();
-   c.判断两个集合中是否存在相同的元素并保留两个集合中相同的元素删除不同的元素：boolean retainAll(Collection&amp;lt;?&amp;gt; c);
-（5）其他
-   将集合中元素转为数组：a.    Ojbect[] toArray();
-                 b.    &amp;lt;T&amp;gt;  T[] toArray();   泛型
-</code></pre><p>6、迭代器 Iterator<br>    （1）通过集合对象获取其对应的Iterator对象；<br>    （2）判断是否存在下一个元素；<br>    （3）取出该元素并将迭代器对象指向下一个元素；</p>
-<pre><code>Iterator iterator():取出元素的方式：迭代器。
-    该对象必须依赖于具体容器，因为每一个容器的数据结构都不同。
-    所以该迭代器对象是在容器中进行内部实现的。
-    对于使用容器者而言，具体的实现不重要，只要通过容器获取到该实现的迭代器的对象即可，也就是iterator方法。
-</code></pre><p>7、Collection两大体系：链表List、集合Set<br>    List特点：元素有序；元素可以重复；元素都有索引（角标）<br>    Set 特点：元素无序；元素不可以重复；</p>
-<pre><code>List特有的常见方法：有一个共性就是可以操作角标。
-</code></pre><p>8、List三大常用集合：<br>    Vector:内部是数组数据结构，是同步的（线程安全的）。增删查询都很慢。<br>    ArrayList:内部是数组数据结构，是不同步的（线程不安全的）。替代了Vector。查询速度快，增删比较慢。<br>    LinkedList:内部是链表数据结构，是不同步的（线程不安全的）。增删元素速度快。</p>
-<p>9、Set常用集合：<br>    Set中方法与Collection一致。</p>
-<pre><code>（1）HashSet：内部数据结构是哈希表，是不同步的。
-    Set集合中元素都必须是唯一的，HashSet作为其子类也需保证元素的唯一性。
-    判断元素唯一性的方式：
-       通过存储对象（元素）的hashCode和equals方法来完成对象唯一性的。
-       如果对象的hashCode值不同，那么不用调用equals方法就会将对象直接存储到集合中；
-       如果对象的hashCode值相同，那么需调用equals方法判断返回值是否为true，
-        若为false, 则视为不同元素，就会直接存储；
-        若为true， 则视为相同元素，不会存储。
-
- PS：如果要使用HashSet集合存储元素，该元素的类必须覆盖hashCode方法和equals方法。
- 一般情况下，如果定义的类会产生很多对象，通常都需要覆盖equals，hashCode方法。建立对象判断是否相同的依据。
-
-（2）TreeSet：保证元素唯一性的同时可以对内部元素进行排序，是不同步的。
-    判断元素唯一性的方式：
-       根据比较方法的返回结果是否为0，如果为0视为相同元素，不存；如果非0视为不同元素，则存。
-    TreeSet对元素的排序有两种方式：
-        方式一：使元素（对象）对应的类实现Comparable接口，覆盖compareTo方法。这样元素自身具有比较功能。
-        方式二：使TreeSet集合自身具有比较功能，定义一个类实现Comparable接口覆盖其compareTo方法。（相当于自定义了一个比较器）
-            将该类对象作为参数传递给TreeSet集合的构造函数。（TreeSet(Comparator&amp;lt;? super E&amp;gt; c) ）
-            ArrayList和Vector有什么区别？HashMap和HashTable有什么区别？
-</code></pre><p>   Vector和HashTable是线程安全的同步的  ArrayList和HashMap性能比Vector和HashTable好<br> 大致讲解java集合的体系结构<br>   List、Set、Map是这个集合体系中最主要的三个接口。<br>      其中List和Set继承自Collection接口。<br>      Set不允许元素重复。HashSet和TreeSet是两个主要的实现类。<br>      List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。<br>      Map也属于集合系统，但和Collection接口不同。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是    三个主要的实现类。<br>      SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</p>
+        <h2 id="javascript原型"><a href="#javascript原型" class="headerlink" title="javascript原型"></a>javascript原型</h2><h5 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h5><p>每一个对象都与一个可以继承属性的原型对象相关联。从对象文字创建的所有对象都链接到Object.prototype，这是一个JavaScript标准对象<br>所有引用类型（函数，数组，对象）都拥有&#95;&#95;proto&#95;&#95;属性（隐式原型）<br>所有函数拥有prototype属性（显式原型）（仅限函数）<br>原型对象：拥有prototype属性的对象，在定义函数时就被创建<br>&#95;&#95;proto&#95;&#95;：是一个对象拥有的内置属性，是JS内部使用寻找原型链的属性。可以理解为它是一个指针，用于指向创建它的函数对象的原型对象prototype（即构造函数的prototype）用chrome和FF都可以访问到对象的<strong>proto</strong>属性，IE不可以。</p>
+<h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Dog(name,age) &#123;</span><br><span class="line">   this.dogname= name;</span><br><span class="line">   this.dongage = age;</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype.eat = function() &#123;</span><br><span class="line">   console.log(&quot;Host i like eat meat&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let mydog = new Dog(&quot;菲菲&quot;,1);</span><br><span class="line">mydog.eat();</span><br></pre></td></tr></table></figure>
+<p>实例mydog的隐式原型&#95;&#95;proto&#95;&amp;#95指向的是他构造函数的显示原型prototype<br><code>mydog.__proto__===Dog.prototype</code><br>当调用某种方法或查找某种属性时，首先会在自身调用和查找，如果自身并没有该属性或方法，则会去它的<strong>proto</strong>属性中调用查找，也就是它构造函数的prototype中调用查找。所以很好理解实例继承构造函数的方法和属性：<br>mydog本身没有eat方法，所以会去Dog的显式原型中调用eat，即实例继承构造函数的方法。</p>
+<h5 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.a = &quot;w&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;</span><br><span class="line">function Dog(name,age) &#123;</span><br><span class="line">    this.dogName = name;</span><br><span class="line">    this.dogAge = age;</span><br><span class="line">&#125;</span><br><span class="line">let mydog = new Dog(&apos;菲菲&apos;,1);</span><br><span class="line">console.log(mydog.a) //打印1</span><br><span class="line">console.log(mydog.b) //打印2</span><br></pre></td></tr></table></figure>
+<p>上面打印结构 打印1是undefiend 打印2是原因是:<br> mydog是Dog()的实例，是一个Dog对象，它拥有一个属性值&#95;&#95;proto&#95;&#95;，并且&#95;&#95;proto&#95;&#95;是一个对象，包含两个属性值constructor和&#95;&#95;proto&#95;&#95;<br>我们打印一下mydog的&#95;&#95;proto&#95;&#95;属性和constructor属性<br><code>console.log(mydog.__proto__.constructor)
+  console.log(mydog.__proto__.__proto__)</code><br>结果如下</p>
+<hr>
+<p><img src="proto1.png" alt="mongodb"></p>
+<hr>
+<p>我们调用constructor属性，mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;.constructor得到的是Object()函数，Dog.prototype的隐式原型的constructor指向Object()，即Dog.prototype.<strong>proto</strong>.constructor == Object()<br>从mydog.&#95;&#95;proto&#95;&#95;.constructor返回的结果为构造函数本身 Dog.prototype.constructor == Dog()所以mydog.<strong>_proto</strong>.<strong>proto</strong>== Object.prototype<br>所以mydog.b打印结果为b，mydot没有b属性，会一直通过&#95;&#95;proto&#95;&#95;向上查找，最后当查找到Object.prototype时找到，最后打印出b，向上查找过程中，得到的是Object.prototype，而不是Function.prototype，找不到a属性，所以结果为undefined，这就是原型链，通过<strong>proto</strong>向上进行查找，最终到null结束</p>
+<p>总结：</p>
+<ul>
+<li>查找属性，如果本身没有，则会去&#95;&#95;proto&#95;&#95;中查找，也就是构造函数的显式原型中查找，如果构造函数的显式原型中也没有该属性，则继续向构造函数的显式原型的&#95;&#95;proto&#95;&amp;#95中查找，一直到null，如果没有则返回undefined</li>
+<li>mydog.&#95;&#95;proto&#95;&#95;.constructor  == function Dog(){}</li>
+<li>mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;== Object.prototype</li>
+<li>mydog.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;.&#95;&#95;proto&#95;&#95;== Object.prototype.&#95;&#95;proto&#95;&#95; == null         </li>
+<li>通过&#95;&#95;proto&#95;&#95;形成原型链而非protrotype<br>结合下面的图片更容易理解原型和原型链<br><img src="prototype.png" alt="mongodb"></li>
+</ul>
 
       
     </div>
@@ -361,8 +344,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sushengxi.git.io/2018/01/30/Nodejs-app-use的使用/" rel="next" title="Nodejs app.use的使用">
-                <i class="fa fa-chevron-left"></i> Nodejs app.use的使用
+              <a href="/sushengxi.git.io/2017/03/23/mondodb聚合/" rel="next" title="mongodb聚合">
+                <i class="fa fa-chevron-left"></i> mongodb聚合
               </a>
             
           </div>
@@ -370,6 +353,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sushengxi.git.io/2017/05/23/mongodb管道/" rel="prev" title="mongodb管道">
+                mongodb管道 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -483,7 +470,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java中Collection的认识"><span class="nav-number">1.</span> <span class="nav-text">java中Collection的认识</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript原型"><span class="nav-number">1.</span> <span class="nav-text">javascript原型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数对象"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">函数对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#原型和原型链"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">原型和原型链</span></a></li></ol></li></ol></div>
             
 
           </div>
