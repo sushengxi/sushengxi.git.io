@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="##javascript数据结构==栈&amp;ensp;&amp;ensp;javascript数据结构==栈&amp;ensp;&amp;ensp;栈，又叫堆栈，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为栈顶，数据只能&amp;ensp;&amp;ensp;在栈顶添加或删除，遵循 先入后出(LIFO，last-in-first-out) 的原则。&amp;ensp;&amp;ensp;对栈的操作主要有两种，一是将一">
+<meta name="description" content="Node事件循环在讲Node事件循环前我们先看一下时间循环的流程图    消息循环又细分为 6 个阶段(官方叫做 Phase), 每个阶段都会有一个类似于队列的结构, 存储着该阶段需要处理的回调函数. 我们来看一下这 6 个 Phase 的作用  Timer Phase这是消息循环的第一个阶段,处理所有 setTimeout 和 setInterval 的回调，这些回调被保存在一个最小堆(min">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript数据结构==&gt;栈">
-<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/23/javascript数据结构-栈/index.html">
+<meta property="og:title" content="Node 事件循环">
+<meta property="og:url" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/07/10/’node运行环境下的事件循环/index.html">
 <meta property="og:site_name" content="little su的博客">
-<meta property="og:description" content="##javascript数据结构==栈&amp;ensp;&amp;ensp;javascript数据结构==栈&amp;ensp;&amp;ensp;栈，又叫堆栈，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为栈顶，数据只能&amp;ensp;&amp;ensp;在栈顶添加或删除，遵循 先入后出(LIFO，last-in-first-out) 的原则。&amp;ensp;&amp;ensp;对栈的操作主要有两种，一是将一">
+<meta property="og:description" content="Node事件循环在讲Node事件循环前我们先看一下时间循环的流程图    消息循环又细分为 6 个阶段(官方叫做 Phase), 每个阶段都会有一个类似于队列的结构, 存储着该阶段需要处理的回调函数. 我们来看一下这 6 个 Phase 的作用  Timer Phase这是消息循环的第一个阶段,处理所有 setTimeout 和 setInterval 的回调，这些回调被保存在一个最小堆(min">
 <meta property="og:locale" content="中文，英文">
-<meta property="og:updated_time" content="2019-01-24T10:01:42.887Z">
+<meta property="og:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/07/10/’node运行环境下的事件循环/loop.png">
+<meta property="og:updated_time" content="2019-01-28T03:38:12.074Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript数据结构==&gt;栈">
-<meta name="twitter:description" content="##javascript数据结构==栈&amp;ensp;&amp;ensp;javascript数据结构==栈&amp;ensp;&amp;ensp;栈，又叫堆栈，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为栈顶，数据只能&amp;ensp;&amp;ensp;在栈顶添加或删除，遵循 先入后出(LIFO，last-in-first-out) 的原则。&amp;ensp;&amp;ensp;对栈的操作主要有两种，一是将一">
+<meta name="twitter:title" content="Node 事件循环">
+<meta name="twitter:description" content="Node事件循环在讲Node事件循环前我们先看一下时间循环的流程图    消息循环又细分为 6 个阶段(官方叫做 Phase), 每个阶段都会有一个类似于队列的结构, 存储着该阶段需要处理的回调函数. 我们来看一下这 6 个 Phase 的作用  Timer Phase这是消息循环的第一个阶段,处理所有 setTimeout 和 setInterval 的回调，这些回调被保存在一个最小堆(min">
+<meta name="twitter:image" content="https://github.com/sushengxi/sushengxi.git.io.git/2017/07/10/’node运行环境下的事件循环/loop.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2018/01/23/javascript数据结构-栈/">
+  <link rel="canonical" href="https://github.com/sushengxi/sushengxi.git.io.git/2017/07/10/’node运行环境下的事件循环/">
 
 
 
 
 
-  <title>javascript数据结构==>栈 | little su的博客</title>
+  <title>Node 事件循环 | little su的博客</title>
   
 
 
@@ -232,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/01/23/javascript数据结构-栈/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/07/10/’node运行环境下的事件循环/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="little su">
@@ -249,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">javascript数据结构==>栈</h1>
+          <h1 class="post-title" itemprop="name headline">Node 事件循环</h1>
         
 
         <div class="post-meta">
@@ -261,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-23T15:54:54+08:00">
-                2018-01-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T15:27:35+08:00">
+                2017-07-10
               </time>
             
 
@@ -299,7 +301,25 @@
       
 
       
-        <p>##javascript数据结构==栈<br>&ensp;&ensp;javascript数据结构==栈<br>&ensp;&ensp;栈，又叫堆栈，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为栈顶，数据只能&ensp;&ensp;在栈顶添加或删除，遵循 先入后出(LIFO，last-in-first-out) 的原则。<br>&ensp;&ensp;对栈的操作主要有两种，一是将一个元素压入栈，push方法，另一个就是将栈顶元素出栈，pop方法。除此之外，栈还有其他的&ensp;&ensp;一些属性和方法：查看当前栈顶的元素值，我们使用 peek 方法，它仅仅返回栈顶元素值，并不删除它；clear 方法用于清空当&ensp;&ensp;前栈内的所有元素；top属性记录当前栈顶位置；length方法返回当前栈内元素总数等；接着我们定义栈的数据类型，并利用JS&ensp;&ensp;中的数组去实现它。<br>&ensp;&ensp;下面是栈的实现<br>&ensp;&ensp;我们利用 dataStore 来保存栈内元素，初始化为空数组，top 属性用于记录当前栈顶位置，初始化的时候为0，<br>&ensp;&ensp;表示栈顶对应数组的起始位置是0，如果有元素入栈，则该属性会随之反生变化。<br>&ensp;&ensp;栈的方法:<br>&ensp;&ensp;push向栈内压入一个元素<br>&ensp;&ensp;pop像栈取出一个元素<br>&ensp;&ensp;peek查看栈顶元素<br>&ensp;&ensp;length：返回栈内元素总数<br>&ensp;&ensp;clear：清空栈<br>&ensp;&ensp;具体实现得代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">function Stack() &#123;</span><br><span class="line">  this.dataStore = [];//初始化为空</span><br><span class="line">  this.top = 0; //记录栈顶位置</span><br><span class="line">  this.pop = pop;//出栈</span><br><span class="line">  this.push = push;//入栈</span><br><span class="line">  this.peek = peek;//查看栈顶元素</span><br><span class="line">  this.length = length;//查看栈内元素总数</span><br><span class="line">  this.clear = clear;//清空栈</span><br><span class="line">&#125;</span><br><span class="line">//入栈</span><br><span class="line">function push(ele) &#123;</span><br><span class="line">this.dataStore[this.top++] = ele;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出栈</span><br><span class="line">function pop() &#123;</span><br><span class="line">  return this.dataStore[--this.top];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//查看栈顶的元素</span><br><span class="line">function peek() &#123;</span><br><span class="line">if(this.top &gt;0) &#123;</span><br><span class="line">  return this.dataStore[this.top];</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  return -1;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">//查看栈里面元素的数量</span><br><span class="line">function length() &#123;</span><br><span class="line">   return this.top;</span><br><span class="line">&#125;</span><br><span class="line">//清空栈</span><br><span class="line">function clear() &#123; </span><br><span class="line">   delete this.dataStore;</span><br><span class="line">   this.dataStore = [];</span><br><span class="line">   this.top = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><p>在讲Node事件循环前我们先看一下时间循环的流程图</p>
+<hr>
+<p><img src="loop.png" alt="mongodb"></p>
+<hr>
+<p>消息循环又细分为 6 个阶段(官方叫做 Phase), 每个阶段都会有一个类似于队列的结构, 存储着该阶段需要处理的回调函数. 我们来看一下这 6 个 Phase 的作用</p>
+<ul>
+<li>Timer Phase<br>这是消息循环的第一个阶段,处理所有 setTimeout 和 setInterval 的回调，这些回调被保存在一个最小堆(min heap) 中. 这样引擎只需要每次判断头元素, 如果符合条件就拿出来执行, 直到遇到一个不符合条件或者队列空了, 才结束 Timer Phase.Timer Phase 中判断某个回调是否符合条件的方法也很简单. 消息循环每次进入 Timer Phase 的时候都会保存一下当时的系统时间,然后只要看上述最小堆中的回调函数设置的启动时间是否超过进入 Timer Phase 时保存的时间, 如果超过就拿出来执行.此外, Nodejs 为了防止某个 Phase 任务太多, 导致后续的 Phase 发生饥饿的现象, 所以消息循环的每一个迭代(iterate) 中, 每个 Phase 执行回调都有个最大数量. 如果超过数量的话也会强行结束当前 Phase 而进入下一个 Phase. 这一条规则适用于消息循环中的每一个 Phase.</li>
+<li>Pending I/O Callback Phase<br>这一阶段是执行你的 fs.read, socket 等 IO 操作的回调异常.</li>
+<li>Idle, Prepare Phase<br>内部使用</li>
+<li>Poll Phase<br>这是整个消息循环中最重要的一个 Phase, 作用是等待异步请求和数据说它最重要是因为它支撑了整个消息循环机制.Poll Phase 首先会执行 watch_queue 队列中的 IO 请求, 一旦 watch_queue 队列空, 则整个消息循环就会进入 sleep , 从而等待被内核事件唤醒.当js层代码注册的事件回调都没有返回的时候，事件循环会阻塞在poll阶段。看到这里，你可能会想了，会永远阻塞在此处吗？当然 Poll Phase 不能一直等下去.<br>1.它首先会判断后面的 Check Phase 以及 Close Phase 是否还有等待处理的回调. 如果有, 则不等待, 直接进入下一个 Phase.<br>2.如果没有其他回调等待执行, 它会给 epoll 这样的方法设置一个 timeout（ 这个 timeout 设置为多少合适呢? 答案就是 Timer Phase 中最近要执行的回调启动时间到现在的差值, 假设这个差值是 detal. 因为 Poll Phase 后面没有等待执行的回调了. 所以这里最多等待 delta 时长, 如果期间有事件唤醒了消息循环, 那么就继续下一个 Phase 的工作; 如果期间什么都没发生, 那么到了 timeout 后, 消息循环依然要进入后面的 Phase, 让下一个迭代的 Timer Phase 也能够得到执行. Nodejs 就是通过 Poll Phase, 对 IO 事件的等待和内核异步事件的到达来驱动整个消息循环的.）</li>
+<li>Check Phase<br>这个阶段只处理 setImmediate 的回调函数<br>那么为什么这里要有专门一个处理 setImmediate 的 Phase 呢? 简单来说, 是因为 Poll Phase 阶段可能设置一些回调, 希望在 Poll Phase 后运行. 所以在 Poll Phase 后面增加了这个 Check Phase.</li>
+<li>Close Callbacks Phase<br>专门处理一些 close 类型的回调. 比如 socket.on(‘close’, …). 用于资源清理.<br>###Node.js事件循环原理</li>
+<li>进入 timers 阶段<br> 检查 timer 队列是否有到期的 timer 回调，如果有，将到期的 timer 回调按照 timerId 升序执行。</li>
+<li>进入IO callbacks阶段。<br>执行fs.read, socket 等 IO 操作的回调异常。退出该阶段。</li>
+<li>进入 idle，prepare 阶段：<br>这个阶段执行的都是libuv的逻辑</li>
+<li>进入 poll 阶段<br>当event loop到poll阶段时，且不存在timer，将会发生下面的情况<br>如果poll queue不为空，event loop将同步的执行queue里的callback,直至queue为空，或执行的callback到达系统上限;如果poll       queue为空，将会发生下面情况：如果代码已经被setImmediate()设定了callback 或者有满足close callbacks阶段的callback,       event loop将结束poll阶段进入check阶段，并执行check阶段的queue (check阶段的queue是 setImmediate设定的)如果代码没有设定   setImmediate(callback)或者没有满足close callbacks阶段的callback，event loop将阻塞在该阶段等待callbacks加入poll         queue;<br>当event loop到poll阶段时，如果存在timer并且timer未到超时时间，将会发生下面情况：<br>则会把最近的一个timer剩余超时时间作为参数传入io_poll()中，这样event loop 阻塞在poll阶段等待时，如果没有任何I/O事件触发，   也会由timerout触发跳出等待的操作，结束本阶段，然后在close callbacks阶段结束之后会在进行一次timer超时判断<br>所以实际上，timer检查会发生在两个地方：timers阶段和close callbacks阶段结束之后。</li>
+<li>进入 check 阶段<br>执行所有immediate回调。</li>
+<li>进入 closing 阶段。<br>处理一些 close 类型的回调<br>如果有，继续下一轮循环。如果没有，结束事件循环，退出程序。</li>
+</ul>
 
       
     </div>
@@ -324,8 +344,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sushengxi.git.io/2018/01/22/Nodejs-log4js的使用/" rel="next" title="Nodejs log4js的使用">
-                <i class="fa fa-chevron-left"></i> Nodejs log4js的使用
+              <a href="/sushengxi.git.io/2017/05/23/mongodb管道/" rel="next" title="mongodb管道">
+                <i class="fa fa-chevron-left"></i> mongodb管道
               </a>
             
           </div>
@@ -334,8 +354,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sushengxi.git.io/2018/01/24/javascript队列/" rel="prev" title="javascript数据接口==>队列">
-                javascript数据接口==>队列 <i class="fa fa-chevron-right"></i>
+              <a href="/sushengxi.git.io/2017/11/03/javascript异步的几种方式/" rel="prev" title="javascript异步的几种方式">
+                javascript异步的几种方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -388,8 +408,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -431,6 +460,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node事件循环"><span class="nav-number">1.</span> <span class="nav-text">Node事件循环</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

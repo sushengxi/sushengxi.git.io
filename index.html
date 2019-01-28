@@ -1145,6 +1145,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/07/10/’node运行环境下的事件循环/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sushengxi.git.io/2017/07/10/’node运行环境下的事件循环/" itemprop="url">Node 事件循环</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T15:27:35+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><p>在讲Node事件循环前我们先看一下时间循环的流程图</p>
+<hr>
+<p><img src="loop.png" alt="mongodb"></p>
+<hr>
+<p>消息循环又细分为 6 个阶段(官方叫做 Phase), 每个阶段都会有一个类似于队列的结构, 存储着该阶段需要处理的回调函数. 我们来看一下这 6 个 Phase 的作用</p>
+<ul>
+<li>Timer Phase<br>这是消息循环的第一个阶段,处理所有 setTimeout 和 setInterval 的回调，这些回调被保存在一个最小堆(min heap) 中. 这样引擎只需要每次判断头元素, 如果符合条件就拿出来执行, 直到遇到一个不符合条件或者队列空了, 才结束 Timer Phase.Timer Phase 中判断某个回调是否符合条件的方法也很简单. 消息循环每次进入 Timer Phase 的时候都会保存一下当时的系统时间,然后只要看上述最小堆中的回调函数设置的启动时间是否超过进入 Timer Phase 时保存的时间, 如果超过就拿出来执行.此外, Nodejs 为了防止某个 Phase 任务太多, 导致后续的 Phase 发生饥饿的现象, 所以消息循环的每一个迭代(iterate) 中, 每个 Phase 执行回调都有个最大数量. 如果超过数量的话也会强行结束当前 Phase 而进入下一个 Phase. 这一条规则适用于消息循环中的每一个 Phase.</li>
+<li>Pending I/O Callback Phase<br>这一阶段是执行你的 fs.read, socket 等 IO 操作的回调异常.</li>
+<li>Idle, Prepare Phase<br>内部使用</li>
+<li>Poll Phase<br>这是整个消息循环中最重要的一个 Phase, 作用是等待异步请求和数据说它最重要是因为它支撑了整个消息循环机制.Poll Phase 首先会执行 watch_queue 队列中的 IO 请求, 一旦 watch_queue 队列空, 则整个消息循环就会进入 sleep , 从而等待被内核事件唤醒.当js层代码注册的事件回调都没有返回的时候，事件循环会阻塞在poll阶段。看到这里，你可能会想了，会永远阻塞在此处吗？当然 Poll Phase 不能一直等下去.<br>1.它首先会判断后面的 Check Phase 以及 Close Phase 是否还有等待处理的回调. 如果有, 则不等待, 直接进入下一个 Phase.<br>2.如果没有其他回调等待执行, 它会给 epoll 这样的方法设置一个 timeout（ 这个 timeout 设置为多少合适呢? 答案就是 Timer Phase 中最近要执行的回调启动时间到现在的差值, 假设这个差值是 detal. 因为 Poll Phase 后面没有等待执行的回调了. 所以这里最多等待 delta 时长, 如果期间有事件唤醒了消息循环, 那么就继续下一个 Phase 的工作; 如果期间什么都没发生, 那么到了 timeout 后, 消息循环依然要进入后面的 Phase, 让下一个迭代的 Timer Phase 也能够得到执行. Nodejs 就是通过 Poll Phase, 对 IO 事件的等待和内核异步事件的到达来驱动整个消息循环的.）</li>
+<li>Check Phase<br>这个阶段只处理 setImmediate 的回调函数<br>那么为什么这里要有专门一个处理 setImmediate 的 Phase 呢? 简单来说, 是因为 Poll Phase 阶段可能设置一些回调, 希望在 Poll Phase 后运行. 所以在 Poll Phase 后面增加了这个 Check Phase.</li>
+<li>Close Callbacks Phase<br>专门处理一些 close 类型的回调. 比如 socket.on(‘close’, …). 用于资源清理.<br>###Node.js事件循环原理</li>
+<li>进入 timers 阶段<br> 检查 timer 队列是否有到期的 timer 回调，如果有，将到期的 timer 回调按照 timerId 升序执行。</li>
+<li>进入IO callbacks阶段。<br>执行fs.read, socket 等 IO 操作的回调异常。退出该阶段。</li>
+<li>进入 idle，prepare 阶段：<br>这个阶段执行的都是libuv的逻辑</li>
+<li>进入 poll 阶段<br>当event loop到poll阶段时，且不存在timer，将会发生下面的情况<br>如果poll queue不为空，event loop将同步的执行queue里的callback,直至queue为空，或执行的callback到达系统上限;如果poll       queue为空，将会发生下面情况：如果代码已经被setImmediate()设定了callback 或者有满足close callbacks阶段的callback,       event loop将结束poll阶段进入check阶段，并执行check阶段的queue (check阶段的queue是 setImmediate设定的)如果代码没有设定   setImmediate(callback)或者没有满足close callbacks阶段的callback，event loop将阻塞在该阶段等待callbacks加入poll         queue;<br>当event loop到poll阶段时，如果存在timer并且timer未到超时时间，将会发生下面情况：<br>则会把最近的一个timer剩余超时时间作为参数传入io_poll()中，这样event loop 阻塞在poll阶段等待时，如果没有任何I/O事件触发，   也会由timerout触发跳出等待的操作，结束本阶段，然后在close callbacks阶段结束之后会在进行一次timer超时判断<br>所以实际上，timer检查会发生在两个地方：timers阶段和close callbacks阶段结束之后。</li>
+<li>进入 check 阶段<br>执行所有immediate回调。</li>
+<li>进入 closing 阶段。<br>处理一些 close 类型的回调<br>如果有，继续下一轮循环。如果没有，结束事件循环，退出程序。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/05/23/mongodb管道/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1406,166 +1544,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/03/23/mondodb聚合/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="little su">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="little su的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sushengxi.git.io/2017/03/23/mondodb聚合/" itemprop="url">mongodb聚合</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T14:27:35+08:00">
-                2017-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="mongodb聚合"><a href="#mongodb聚合" class="headerlink" title="mongodb聚合"></a>mongodb聚合</h2><p>&ensp;&ensp;MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。<br>基本语法为：db.collection.aggregate( [ &lt;stage1&gt;, &lt;stage2&gt;, … ] )<br>我们在数据库中插入一下文档：</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;s&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;a&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:2,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;d&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:3,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;g&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;h&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;k&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:100&#125;)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>&ensp;&ensp;执行下面的语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;personCount&quot;:&#123;&quot;$sum&quot;:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<p>对性别sex进行分组并统计他们的数量</p>
-<hr>
-<p><img src="personcount.png" alt="mongodb"></p>
-<hr>
-<p>&ensp;&ensp;由于上面的数据看效果不是太明显 我们在插入两条数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;p&quot;,&quot;sex&quot;:&quot;男&quot;,&quot;age&quot;:1,&quot;score&quot;:600&#125;)</span><br><span class="line">db.collection.save(&#123;&quot;name&quot;:&quot;u&quot;,&quot;sex&quot;:&quot;女&quot;,&quot;age&quot;:1,&quot;score&quot;:20&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>&ensp;&ensp;对性别进行分组然后对score进行求平均值 $avg<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dv.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreAvg&quot;:&#123;&quot;$avg&quot;:&quot;$score&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="scoreavg.png" alt="mongodb"></p>
-<hr>
-<p>&ensp;&ensp;对性别进行分组然后求最大值 $max<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreMax&quot;:&#123;&quot;$max&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="scoreavg.png" alt="mongodb"></p>
-<hr>
-<p>&ensp;&ensp;对性别进行分组然后取最小值 $min<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scoreMin&quot;:&#123;&quot;$min&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="scoreavg.png" alt="mongodb"></p>
-<hr>
-<p>&ensp;&ensp;对性别进行分组然后将score放进一个数组scores $push<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scores&quot;:&#123;&quot;$push&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="push.png" alt="mongodb"></p>
-<hr>
-<p>对性别进行分组然后将score放进一个数组scores去掉重复的元素 $addToSet<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;scores&quot;:&#123;&quot;$addToSet&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="addtoset.png" alt="mongodb"></p>
-<hr>
-<p>根据资源文档的排序获取第一个元素 $first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;firstelement&quot;:&#123;&quot;$first&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="firstelement.png" alt="mongodb"></p>
-<hr>
-<p>根据资源文档的排序获取最后一个元素 $last<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$sex&quot;,&quot;lastelement&quot;:&#123;&quot;$last&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="last.png" alt="mongodb"></p>
-<hr>
-<p>全部统计不进行分组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;null&quot;,&quot;totalScore&quot;:&#123;&quot;$push&quot;:&quot;$score&quot;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><img src="all.png" alt="mongodb"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1616,7 +1594,7 @@
               
                 <a href="/sushengxi.git.io/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
