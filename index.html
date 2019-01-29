@@ -519,6 +519,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/01/26/javascript数据结构-链表/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="little su">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="little su的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sushengxi.git.io/2018/01/26/javascript数据结构-链表/" itemprop="url">javascript数据接口==>链表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-26T17:58:25+08:00">
+                2018-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="javascript数据结构链表"><a href="#javascript数据结构链表" class="headerlink" title="javascript数据结构链表"></a>javascript数据结构链表</h2><p>链表特点：链表存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（指针或链接）组成。<br>相对于传统的数组，链表的一个好处在于，添加或移除元素的时候不需要移动其他元素。然而，链表需要使用指针，因此实现链表时需要额外注意。数组的另一个细节是可以直接访问任何位置的元素，而想要访问链表中间的一个元素，需要从起点开始迭代链表直到找到所需元素。<br>链表又分为：单向链表，双向链表，单向循环链表,双向循环列表<br>下面我们用js来实现一个链表</p>
+<ul>
+<li>单向链表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function linkList() &#123;</span><br><span class="line">    //创建节点 一个节点表示当前元素和指向他的下一个元素的指针</span><br><span class="line">    function Node(ele) &#123;</span><br><span class="line">        this.element = ele;</span><br><span class="line">        this.next = null;</span><br><span class="line">    &#125;</span><br><span class="line">    var length = 0;</span><br><span class="line">    var head = null;</span><br><span class="line">    this.append = append;//向链表尾部添加一个元素</span><br><span class="line">    this.insert = insert;//向链表制定位置插入一个元素</span><br><span class="line">    this.removeAt = removeAt;//链表特定位置删除一个元素</span><br><span class="line">    this.remove = remove;//链表删除一项</span><br><span class="line">    this.indexOf = indexOf;//返回元素在链表中的位置</span><br><span class="line">    this.size = size;//返回链表元素的个数</span><br><span class="line">    this.isEmpty = isEmpty;//链表是否为空</span><br><span class="line">    this.getHead = getHead;//获取链表的头元素</span><br><span class="line">    this.toString= toString;//只输出元素的值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function append(ele) &#123;</span><br><span class="line">        let node = new Node(ele),current;</span><br><span class="line">        //如果链表的head为null 则是一个空链表 把元素放到链表首部</span><br><span class="line">        if(head == null) &#123;</span><br><span class="line">            head = node;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            current = head;</span><br><span class="line">            //循环链表找到最后一项</span><br><span class="line">            while(current.next) &#123;</span><br><span class="line">                 current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            current.next = node;</span><br><span class="line">           &#125;</span><br><span class="line">        length++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在普通的链表中链表的最后一个元素的next指向null<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">function insert(postion,ele) &#123;</span><br><span class="line">        //界限判断</span><br><span class="line">        if(postion &gt;=0 &amp;&amp; postion &lt;= length) &#123;</span><br><span class="line">            let node = new Node(ele),</span><br><span class="line">            current = head,</span><br><span class="line">            previous,</span><br><span class="line">            index = 0;</span><br><span class="line">            if(postion == 0) &#123;</span><br><span class="line">		      //如果插入位置是0那么就是head</span><br><span class="line">                node.next = current;</span><br><span class="line">                head = node;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while(index++ &lt; postion) &#123;</span><br><span class="line">                    previous = current;</span><br><span class="line">                    current = current.next;</span><br><span class="line">                &#125;</span><br><span class="line">                node.next = current;</span><br><span class="line">                previous.next = node;</span><br><span class="line">            &#125;</span><br><span class="line">            length++;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"> function toString() &#123;</span><br><span class="line">        let current = head,</span><br><span class="line">            string = &quot;&quot;;</span><br><span class="line">            while(current.next) &#123;</span><br><span class="line">                string +=current.element+&quot;,&quot;;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">			//因为链表尾元素是没有next所有在最有要把尾元素加进去</span><br><span class="line">            string += current.element;</span><br><span class="line">            return string.split(&apos;,&apos;)</span><br><span class="line">          &#125;</span><br><span class="line">function removeAt(position) &#123;</span><br><span class="line">        if(position &gt; -1 &amp;&amp; position &lt;= length) &#123;</span><br><span class="line">            let current = head,previous,index = 0;</span><br><span class="line">            if(position == 0) &#123;</span><br><span class="line">                 head = current.next;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while (index++ &lt; position) &#123;</span><br><span class="line">				//这个赋值注意他们的先后顺序</span><br><span class="line">				    previous = current;</span><br><span class="line">                    current = current.next;</span><br><span class="line">                  &#125;</span><br><span class="line">				//上一个元素的下一个元素就是当前元素的下一个元素</span><br><span class="line">               previous.next = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            length--;</span><br><span class="line">            return current.element;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"> function indexOf(ele) &#123;</span><br><span class="line">        let current = head,index = 0;</span><br><span class="line">		//注意这个地方的判断条件是 current 而不是current.next</span><br><span class="line">        while(current) &#123;</span><br><span class="line">            if(current.element == ele) &#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">function size() &#123;</span><br><span class="line">       return length;</span><br><span class="line">   &#125;</span><br><span class="line"> function isEmpty() &#123;</span><br><span class="line">       return length == 0;</span><br><span class="line">   &#125;</span><br><span class="line">   function getHead() &#123;</span><br><span class="line">       return head;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>双向链表<br>一个链向下一个元素，另一个链向前一个元素。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function doublyLiknList() &#123;</span><br><span class="line">    let head = null,length = 0,tail = null;</span><br><span class="line">    function Node(ele) &#123;</span><br><span class="line">        this.element = ele;</span><br><span class="line">        this.next = null;</span><br><span class="line">        this.previous = null;</span><br><span class="line">    &#125;</span><br><span class="line">    this.append = append;</span><br><span class="line">    this.toString = toString;</span><br><span class="line">    this.getHead = getHead;</span><br><span class="line">	this.indexOf = indexOf;</span><br><span class="line">	this.insert = insert;</span><br><span class="line">	this.siz = size;</span><br><span class="line">	this.getTail = getTail;</span><br><span class="line">	this.isEmpty = isEmpty;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function append(ele) &#123;</span><br><span class="line">       let node = new Node(ele),current;</span><br><span class="line">       if(head == null) &#123;</span><br><span class="line">	   //头元素</span><br><span class="line">           head = node;</span><br><span class="line">		//尾元素</span><br><span class="line">           tail = node;</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           current = head;</span><br><span class="line">           while(current.next) &#123;</span><br><span class="line">               current = current.next;</span><br><span class="line">           &#125;</span><br><span class="line">		//当前元素的下一个元素</span><br><span class="line">          current.next = node;</span><br><span class="line">	   //当前元素的上一个元素</span><br><span class="line">          node.previous = current;</span><br><span class="line">          tail = node;</span><br><span class="line">          length++;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function toString() &#123;</span><br><span class="line">       let current = head,string=&quot;&quot;;</span><br><span class="line">       while(current.next) &#123;</span><br><span class="line">           string += current.element +&quot;,&quot;;</span><br><span class="line">          current = current.next;</span><br><span class="line">       &#125;</span><br><span class="line">       string += current.element;</span><br><span class="line">       return string.split(&apos;,&apos;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function getHead() &#123;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function insert(position,ele) &#123;</span><br><span class="line">        if(position &gt;-1 &amp;&amp; position &lt;= length) &#123;</span><br><span class="line">            let node = new Node(ele),index =0,previous,current = head;</span><br><span class="line">            if(position == 0) &#123;</span><br><span class="line">               node.next = head;</span><br><span class="line">               head .previous = node;</span><br><span class="line">               head = node;</span><br><span class="line">            &#125; else if(position == length) &#123;</span><br><span class="line">               current = tail;</span><br><span class="line">               current.next = node;</span><br><span class="line">               node.previous = current;</span><br><span class="line">               tail = node;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">               while(index++ &lt; position) &#123;</span><br><span class="line">                    previous = current;</span><br><span class="line">                    current = current.next;</span><br><span class="line">               &#125;</span><br><span class="line">               previous.next = node;</span><br><span class="line">               node.previous = previous;</span><br><span class="line">               node.next = current;</span><br><span class="line">               current.previous = node;</span><br><span class="line">            &#125;</span><br><span class="line">            length++;</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function indexOf(ele) &#123;</span><br><span class="line">        let current = head,index = 0;</span><br><span class="line">        while(current) &#123;</span><br><span class="line">            if(ele == current.element) &#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;</span><br><span class="line">            current = current.next;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function removeAt(position) &#123;</span><br><span class="line">       let current = head,index = 0,previous;</span><br><span class="line">       if(position &gt; -1 &amp;&amp; position &lt;= length) &#123;</span><br><span class="line">           if(position == 0) &#123;</span><br><span class="line">               head = current.next;</span><br><span class="line">               head.previous = null;</span><br><span class="line">               return current.element; </span><br><span class="line">           &#125; else if (position == length) &#123;</span><br><span class="line">               current = tail;</span><br><span class="line">               tail = current.previous;</span><br><span class="line">               tail.next = null;</span><br><span class="line">               return tail.element;</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               while(index++ &lt; position) &#123;</span><br><span class="line">                  previous = current;</span><br><span class="line">                  current = current.next;</span><br><span class="line">               &#125;</span><br><span class="line">               current.next.previous = previous;</span><br><span class="line">               previous.next = current.next;</span><br><span class="line">               length--;</span><br><span class="line">               return current.element;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; </span><br><span class="line">       return false;</span><br><span class="line">    &#125;</span><br><span class="line">	 function getTail() &#123;</span><br><span class="line">        return tail.element;</span><br><span class="line">    &#125;</span><br><span class="line">    function size() &#123;</span><br><span class="line">        return length;</span><br><span class="line">    &#125;</span><br><span class="line">      function isEmpty() &#123;</span><br><span class="line">        return length == 0;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>单向循环链表<br>循环链表：在单链表的基础上，将尾节点的指针指向头结点，就构成了一个循环链表。环形链表从任意一个节点开始，都可以遍历整个链表。</li>
+</ul>
+<p>*双向循环链表<br>双向循环链表：将双向链表的头尾指针相连，就构成了双向循环链表。这种链表从任意一个节点都可以同时向两个方向进行节点遍历，查询节点的速度也是最快的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2018/01/24/javascript队列/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1412,138 +1552,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/sushengxi/sushengxi.git.io.git/sushengxi.git.io/2017/04/23/浏览器的事件循环/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="little su">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sushengxi.git.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="little su的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sushengxi.git.io/2017/04/23/浏览器的事件循环/" itemprop="url">浏览器的事件循环</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-23T14:27:35+08:00">
-                2017-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="浏览器的事件循环"><a href="#浏览器的事件循环" class="headerlink" title="浏览器的事件循环"></a>浏览器的事件循环</h2><p>首先，javascript 在浏览器端运行是单线程的，这是由浏览器决定的，这是为了避免多线程执行不同任务会发生冲突的情况。也就是说我们写的javascript 代码只在一个线程上运行，称之为主线程（HTML5提供了web worker API可以让浏览器开一个线程运行比较复杂耗时的 javascript任务，但是这个线程仍受主线程的控制）<br>运行下面的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 0; i &lt; 10000;i++) &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;end&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>如果上面的for循环的结束条件更大比较耗时的操作那么在执行这个循环的时候线程就会被阻塞,无法执行下面的操作<br>浏览器是如何解决上面线程阻塞的问题呢<br>为了协调事件，用户交互，脚本，渲染，网络等，用户代理必须使用事件循环。<br>事件循环的主要机制就是任务队列机制:</p>
-<ul>
-<li>一个事件循环有一个或者多个任务队列（task queues）。任务队列是task的有序列表，task是调度Events，Parsing，Callbacks，Using a resource，Reacting to DOM manipulation这些任务的算法;</li>
-<li>每个任务都来自一个特定的任务源（task source）(比如鼠标键盘事件)。来自同一个特定任务源且属于特定事件循环的任务必须被加入到同一个任务队列中，来自不同任务源的任务可以放在不同的任务队列中;</li>
-<li>浏览器调用这些队列中的任务时采取这样的做法: 相同队列中的任务按照先进先出的顺序, 不同的队列按照提前设置的队列优先级来调用. 例如，用户代理可以有一个用于鼠标和键盘事件的任务队列（用户交互任务源），另一个用于其他任务。然后，用户代理75%概率调用键盘和鼠标事件任务队列，25%调用其他队列, 这样的话就保持界面响应而且不会饿死其他任务队列. 但是相同队列中的任务要按照先进先出的顺序。也就是说单独的任务队列中的任务总是按先进先出的顺序执行，但是不保证多个任务队列中的任务优先级，具体实现可能会交叉执行<br>在调用任务的过程中, 会产生新的任务, 浏览器就会不断执行任务, 因此称为事件循环.<br>在调用任务的过程中, 会产生新的任务, 浏览器就会不断执行任务, 因此称为事件循环.<h5 id="微任务队列"><a href="#微任务队列" class="headerlink" title="微任务队列"></a>微任务队列</h5>还有一些特殊任务, 它们不会被放在task queues中, 会放在一个叫做microtask(微任务) queue中任务队列可以有多个, 但是微任务队列只有一个.</li>
-<li>macrotask(宏任务): script（整体代码）, setTimeout, setInterval, setImmediate, I/O, UI rendering等</li>
-<li>microtask(微任务): process.nextTick, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver等<h5 id="事件循环处理过程"><a href="#事件循环处理过程" class="headerlink" title="事件循环处理过程"></a>事件循环处理过程</h5>总体来说, 浏览器端事件循环的一个回合就是:</li>
-<li>从macrotask队列中(task queue)取一个宏任务执行, 执行完后, 取出所有的microtask执行.</li>
-<li>重复回合<br>无论在执行macrotask还是microtask, 都有可能产生新的macrotask或者microtask, 就这样继续执行.<h5 id="具体的代码来理解事件队列"><a href="#具体的代码来理解事件队列" class="headerlink" title="具体的代码来理解事件队列"></a>具体的代码来理解事件队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;start&apos;)</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">   console.log(&quot;settimeout&quot;);</span><br><span class="line">  &#125;,1000)</span><br><span class="line">setImmediate(() =&gt; &#123;</span><br><span class="line">    console.log(&quot;setImmidate&quot;);</span><br><span class="line"> &#125;)</span><br><span class="line">process.nextTick(() =&gt; &#123;</span><br><span class="line">    console.log(&quot;nextTick&quot;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>执行的结果是start  nextTick  setImmidate  settimeout<br>首先, 主任务就是执行脚本, 也就是执行上述代码, 这也是一个task. 在执行代码过程中, 遇到setTimeout、setInterval 就会将回调函数添加到task queue中, 遇到 process.nextTick 就会回调添加到 microtask 中去.<br>Task执行完, 接着取所有 microtask 执行, 所有microtask 执行完了, microtask queue也就空了, 接着再取task执行, 如果microtask queue为空, 没有任务, 则继续取下一个task执行, 就这样循环执行.<br>至于setimmidate和settimeout的先后顺序还在研究一般情况下setImmidate的延迟比settimeout短一点</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1594,7 +1602,7 @@
               
                 <a href="/sushengxi.git.io/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
